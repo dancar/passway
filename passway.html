@@ -1,0 +1,42 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>Passway</title>
+    <style type="text/css" media="screen">
+     form {
+       widht: 100%;
+       background: whitesmoke;
+     }
+
+     textarea {
+       width: 100%;
+       height: 120px;
+     }
+     #content {
+       height: 1000px;
+       background: cyan;
+     }
+    </style>
+  </head>
+  <body>
+    <form id="loadForm" action="javascript:window.load()">
+      <label for="cyphertext"> Cypher:</label>
+      <textarea id="cyphertext"> </textarea>
+      <input type="file" id="cyphertextFile" onchange="loadCyphertextFile()"/>
+      <div id="dropboxCyphertextDiv"> </div>
+      <hr />
+      <label for="privateKey">Private Key:</label>
+      <textarea id="privateKey">  </textarea>
+      <input type="file" id="privateKeyFile" onchange="loadPrivateKeyFile()"/>
+      <br/>
+      <label for="passphrase">Passphrase:</label> <input type=password id="passphrase" />
+      <hr/>
+      <input type=submit value="Load" onclick="load()" />
+      <input type=submit value="Save" onclick="save()" />
+    </form>
+    <textarea id="content"> </textarea>
+    <script type="text/javascript" src="openpgpjs/dist/openpgp.min.js"> </script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"> </script>
+    <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="s14id64p9srxue4"></script>
+    <script type="text/javascript" src="passway.js"> </script>
+  </body>
+</html>
