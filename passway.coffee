@@ -54,6 +54,16 @@ class DropboxPersistence
   log: (msg) ->
     console.log(msg)
 
+class PasswordList
+  constructor: (json) ->
+    list = []
+    try
+      list = JSON.parse(json)
+    catch e
+      console.error "Invalid json: #{json}"
+
+
+
 class Passway
   constructor: (@persistence, @crypto) ->
 
@@ -95,6 +105,7 @@ class Passway
   getPassphrase: (cb) ->
     @passphraseCb = cb
     @passphraseForm.show()
+    @passphraseElem.focus()
 
   onPassphrase: () ->
     @passphraseForm.hide()
