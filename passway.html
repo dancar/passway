@@ -2,39 +2,53 @@
   <head>
     <title>Passway</title>
     <style type="text/css" media="screen">
+
      form {
        widht: 100%;
        background: whitesmoke;
      }
 
-     textarea {
-       width: 100%;
-       height: 120px;
-     }
      #content {
        height: 1000px;
        background: cyan;
      }
+
+     #private-key-form {
+       width: 100%;
+       text-align: center;
+       margin: auto;
+     }
+
+     #passphrase-form {
+       height: 100%;
+       background-color: black;
+       color: white;
+       display: none;
+     }
+
+     #content-list {
+       display: none;
+     }
     </style>
   </head>
   <body>
-    <form id="loadForm" action="javascript:window.load()">
-      <label for="cyphertext"> Cypher:</label>
-      <textarea id="cyphertext"> </textarea>
-      <input type="file" id="cyphertextFile" onchange="loadCyphertextFile()"/>
-      <div id="dropboxCyphertextDiv"> </div>
-      <hr />
+    <form id="private-key-form">
       <label for="privateKey">Private Key:</label>
-      <textarea id="privateKey">  </textarea>
-      <input type="file" id="privateKeyFile" onchange="loadPrivateKeyFile()"/>
-      <br/>
-      <label for="passphrase">Passphrase:</label> <input type=password id="passphrase" />
-      <hr/>
-      <input type=submit value="Load" onclick="load()" />
-      <input type=submit value="Save" onclick="save()" />
+      <input type="file" id="privateKeyFile" />
     </form>
-    <textarea id="content"> </textarea>
-    <script type="text/javascript" src="openpgpjs/dist/openpgp.min.js"> </script>
+
+    <form id="passphrase-form" action="javascript:">
+      <label for="passphrase">Passphrase:</label>
+      <input type=password id="passphrase" name="passphrase" />
+      <input type="submit" value="Ok" />
+    </form>
+
+    <div id="content-list">
+      <textarea id="content"> </textarea>
+      <input type="button value="save" id="save" />
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/dropbox.js/0.10.2/dropbox.js"> </script>
+    <script type="text/javascript" src="openpgpjs/dist/openpgp.js"> </script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"> </script>
     <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="s14id64p9srxue4"></script>
     <script type="text/javascript" src="passway.js"> </script>
