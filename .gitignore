@@ -1,4 +1,3 @@
 passway.js
-.bundle
-Gemfile.lock
-openpgpjs/dist
+node_modules
+.DS_Store
