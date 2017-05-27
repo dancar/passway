@@ -1,3 +1,0 @@
-export decrypt (content) {
-
-}
