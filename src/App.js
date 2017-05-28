@@ -1,27 +1,30 @@
 import React, { Component } from 'react';
 import './App.css';
-import qs from 'querystring'
 import GetFromDropbox from './GetFromDropbox.js'
+import Decoder from './decoder.js'
 class App extends Component {
   constructor () {
     super()
-    this.dropboxAccessToken = this.getDropboxAccessTokenFromUrl()
+    this.state = { encodedContent: "" }
   }
 
-  getDropboxAccessTokenFromUrl () {
-    const queryString = window.location.hash.slice(1)
-    const properties = qs.decode(queryString)
-    return properties.access_token
+  encodedContentChange  = (newContent) => {
+    this.setState({encodedContent: newContent})
   }
 
-  dropboxContentChange (dropboxState) {
-    const encodedContent = dropboxState.content
+  handleOnDecoded = (decodedContent) => {
+    this.setState({decodedContent})
   }
 
   render() {
     return (
       <div className="App">
-        <GetFromDropbox accessToken={this.dropboxAccessToken} onChange={this.dropboxContentChange}/>
+        <GetFromDropbox onChange={this.encodedContentChange}/>
+
+        <hr />
+
+        <textarea readOnly="true" value={btoa(this.state.encodedContent)} />
+        <Decoder onDecoded={ (decoded) => {this.handleOnDecoded(decoded) } } encodedContent={ this.state.encodedContent } decodedContent={ this.state.decodedContent } />
       </div>
     );
   }

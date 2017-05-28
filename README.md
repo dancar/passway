@@ -4,8 +4,10 @@ PASSWAY
 2Do
 ---
 - [ ] Minimal UI
-- [ ] Retrieve data from Dropbox
-- [ ] Decrypt
+- [X] Retrieve data from Dropbox
+- [ ] Save back to Dropbox
+- [X] Decrypt
 - [ ] Encrypt
-- [ ] Devide to differen tpasswords
+- [ ] Devide to different passwords
 - [ ] Mobile??
+- [ ] Persistence of authkey, maybe data as well
