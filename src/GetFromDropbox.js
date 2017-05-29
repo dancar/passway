@@ -1,25 +1,21 @@
 import React from 'react'
 import './GetFromDropbox.css'
 import Dropbox from 'dropbox'
-import qs from 'querystring'
 
 class GetFromDropbox extends React.Component {
+
+  CLIENT_ID = 'oir8xvi101xx01y'
+  FILE_PATH = '/passway.txt.enc'
 
   constructor (props) {
     super()
     this.state = {
-      accessToken: this.getAccessTokenFromLocation() || ""
+      accessToken: ""
     }
     this.dbx = new Dropbox({
-      clientId: '4ogekm2terhl0gi',
+      clientId: this.CLIENT_ID,
     })
    }
-
-  getAccessTokenFromLocation () {
-    const queryString = window.location.hash.slice(1)
-    const properties = qs.decode(queryString)
-    return properties.access_token
-  }
 
   handleAuthClick = () => {
     const COPY_TOKEN_PAGE = 'https://www.dropbox.com/1/oauth2/display_token'
@@ -29,7 +25,7 @@ class GetFromDropbox extends React.Component {
 
   fetchData = () => {
     this.dbx.setAccessToken(this.state.accessToken)
-    this.dbx.filesGetTemporaryLink({path: '/pws.txt.gpg'})
+    this.dbx.filesGetTemporaryLink({path: this.FILE_PATH})
         .then( (response) => {
           return fetch(response.link) })
         .then( (readStream) => {
