@@ -5,7 +5,7 @@ import Dropbox from 'dropbox'
 class GetFromDropbox extends React.Component {
 
   CLIENT_ID = 'oir8xvi101xx01y'
-  FILE_PATH = '/passway.txt.enc'
+  FILE_PATH = '/passway.txt.gpg'
 
   constructor (props) {
     super()

@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
 import GetFromDropbox from './GetFromDropbox.js'
-import Decoder from './decoder.js'
+import Decoder from './Decoder.js'
+import PasswordsList from './PasswordsList.js'
+
 class App extends Component {
   constructor () {
     super()
-    this.state = { encodedContent: "" }
+    this.state = {
+      encodedContent: "",
+      passwords: []
+    }
   }
 
   encodedContentChange  = (newContent) => {
@@ -13,7 +18,12 @@ class App extends Component {
   }
 
   handleOnDecoded = (decodedContent) => {
-    this.setState({decodedContent})
+    const passwords = this.parsePasswords(decodedContent)
+    this.setState({passwords})
+  }
+
+  parsePasswords (data) {
+    return data.split('\n').map( (line) => {return line.split(':')})
   }
 
   render() {
@@ -24,7 +34,8 @@ class App extends Component {
         <hr />
 
         <textarea readOnly="true" value={btoa(this.state.encodedContent)} />
-        <Decoder onDecoded={ (decoded) => {this.handleOnDecoded(decoded) } } encodedContent={ this.state.encodedContent } decodedContent={ this.state.decodedContent } />
+        <Decoder onDecoded={ (decoded) => {this.handleOnDecoded(decoded) } } encodedContent={ this.state.encodedContent }  />
+        <PasswordsList passwords={ this.state.passwords } />
       </div>
     );
   }

@@ -36,7 +36,6 @@ class Decoder extends React.Component {
       <form>
         <input type="password" value={ this.state.passcode } onChange={ this.onPasscodeChange } placeholder="Passcode" name="passcode" />
         <input disabled={ !canDecode } type="submit" value="Decode" onClick={ (e) => {this.handleDecode(e) } } /> <br />
-        <textarea readOnly value={ this.props.decodedContent }/>
       </form>
     )
   }
