@@ -22,8 +22,9 @@ class GetFromDropbox extends React.Component {
   }
 
   handleAuthClick = () => {
-    const authUrl = this.dbx.getAuthenticationUrl(window.location.href)
-    window.open(authUrl, "_self")
+    const COPY_TOKEN_PAGE = 'https://www.dropbox.com/1/oauth2/display_token'
+    const authUrl = this.dbx.getAuthenticationUrl(COPY_TOKEN_PAGE)
+    window.open(authUrl)
   }
 
   fetchData = () => {
