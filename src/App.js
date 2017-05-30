@@ -3,18 +3,20 @@ import './App.css';
 import GetFromDropbox from './GetFromDropbox.js'
 import Decoder from './Decoder.js'
 import PasswordsList from './PasswordsList.js'
+import {Tabs, Tab} from 'react-bootstrap'
 
 class App extends Component {
   constructor () {
     super()
     this.state = {
-      encodedContent: "",
-      passwords: []
+      passwords: [],
+      encodedContent: Uint8Array.from(JSON.parse(localStorage.encodedContent || "[]"))
     }
   }
 
   encodedContentChange  = (newContent) => {
     this.setState({encodedContent: newContent})
+    localStorage.encodedContent = JSON.stringify(Array.from(newContent))
   }
 
   handleOnDecoded = (decodedContent) => {
@@ -23,20 +25,22 @@ class App extends Component {
   }
 
   parsePasswords (data) {
-    return data.split('\n').map( (line) => {return line.split(':')})
+    return data.split('\n')
+      .filter( (line) => { return line.trim().length > 0 })
+      .map( (line) => { return line.split(':')} )
   }
 
   render() {
     return (
-      <div className="App">
-        <GetFromDropbox onChange={this.encodedContentChange}/>
-
-        <hr />
-
-        <textarea readOnly="true" value={btoa(this.state.encodedContent)} />
-        <Decoder onDecoded={ (decoded) => {this.handleOnDecoded(decoded) } } encodedContent={ this.state.encodedContent }  />
-        <PasswordsList passwords={ this.state.passwords } />
-      </div>
+      <Tabs defaultActiveKey={1} className="App">
+        <Tab eventKey={1} title="Connect" >
+            {/* <GetFromDropbox onChange={this.encodedContentChange} /> */}
+            <Decoder onDecoded={ (decoded) => {this.handleOnDecoded(decoded) } } encodedContent={ this.state.encodedContent }  />
+        </Tab>
+        <Tab title="Passwords" eventKey={2}>
+          <PasswordsList passwords={ this.state.passwords } />
+        </Tab>
+      </Tabs>
     );
   }
 }

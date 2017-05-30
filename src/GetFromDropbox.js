@@ -1,5 +1,6 @@
 import React from 'react'
 import './GetFromDropbox.css'
+import { Button } from 'react-bootstrap';
 import Dropbox from 'dropbox'
 
 class GetFromDropbox extends React.Component {
@@ -10,7 +11,7 @@ class GetFromDropbox extends React.Component {
   constructor (props) {
     super()
     this.state = {
-      accessToken: ""
+      accessToken: localStorage.dropboxAccessToken || ""
     }
     this.dbx = new Dropbox({
       clientId: this.CLIENT_ID,
@@ -24,6 +25,7 @@ class GetFromDropbox extends React.Component {
   }
 
   fetchData = () => {
+    localStorage.dropboxAccessToken = this.state.accessToken
     this.dbx.setAccessToken(this.state.accessToken)
     this.dbx.filesGetTemporaryLink({path: this.FILE_PATH})
         .then( (response) => {
@@ -38,10 +40,9 @@ class GetFromDropbox extends React.Component {
   render (props) {
     return (
       <div>
-        <input type="text" placeholder="Access Token" value={ this.state.accessToken } onChange={ (e) => {this.setState({accessToken: e.target.value})}} />
-
-        <button onClick={ this.handleAuthClick } >Get Authentication Token </button>
-        <button onClick={this.fetchData} >Fetch</button>
+        <input type="text" placeholder="Access Token" value={ this.state.accessToken } onChange={ (e) => {this.setState({accessToken: e.target.value})}} ></input>
+        <Button bsStyle="primary" onClick={ this.handleAuthClick } >Get Authentication Token </Button>
+        <Button onClick={this.fetchData} >Fetch</Button>
       </div>
     )
   }

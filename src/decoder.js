@@ -1,6 +1,8 @@
 import React from 'react'
+import './PasswordsList.css'
+import {Button, Form, FormControl, ControlLabel} from 'react-bootstrap'
 import * as openpgp from 'openpgp';
-
+import './decoder.css'
 
 class Decoder extends React.Component {
   constructor () {
@@ -28,15 +30,33 @@ class Decoder extends React.Component {
 
   }
 
+  getStatus = () => {
+    if (!this.props.encodedContent || this.props.encodedContent.length === 0)
+      return "Please load encoded content"
+
+    if (!this.state.passcode || this.state.passcode.length === 0)
+      return "Please enter Passcode"
+
+    return "Ready to decode"
+  }
+
   render = () => {
     const canDecode = this.state.passcode.length > 0
           && this.props.encodedContent
           && this.props.encodedContent.length > 0
     return (
-      <form>
-        <input type="password" value={ this.state.passcode } onChange={ this.onPasscodeChange } placeholder="Passcode" name="passcode" />
-        <input disabled={ !canDecode } type="submit" value="Decode" onClick={ (e) => {this.handleDecode(e) } } /> <br />
-      </form>
+      <Form className="decoder" >
+        <ControlLabel>Enter Passcode:</ControlLabel>
+        <FormControl id="passcode" type="password" value={ this.state.passcode } onChange={ this.onPasscodeChange } placeholder="Passcode"  />
+        <br />
+        <Button
+          disabled={ !canDecode }
+          type="submit"
+          onClick={ (e) => {this.handleDecode(e) } } >
+          Decode
+        </Button>
+        <br />
+      </Form>
     )
   }
 }

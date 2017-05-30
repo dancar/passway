@@ -1,0 +1,8 @@
+.decoder {
+  padding: 50px 20px;
+}
+
+input[type="password"] {
+  text-align: center;
+  font-size: 200%;
+}
