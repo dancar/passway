@@ -3,7 +3,11 @@ PASSWAY
 
 2Do
 ---
-- [ ] Minimal UI
+- [X] Minimal UI
+- [ ] Starting from an empty dataset, defining new passcode
+- [ ] fix css vertical centering somehow
+- [ ] Filtering
+- [ ] Editing + Saving
 - [X] Retrieve data from Dropbox
 - [ ] Save back to Dropbox
 - [ ] Error handling
@@ -11,6 +15,7 @@ PASSWAY
 - [ ] Tests
 - [X] Decrypt
 - [ ] Encrypt
-- [ ] Devide to different passwords
+- [X] Devide to different passwords
 - [ ] Mobile??
-- [ ] Persistence of authkey, maybe data as well
+- [X] Persistence of authkey, maybe data as well
+- [ ] Code Style
