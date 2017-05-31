@@ -30,9 +30,34 @@ class App extends Component {
       .map( (line) => { return line.split(':')} )
   }
 
+  handleItemDelete = (index) => {
+    const newPasswords = this.state.passwords.filter((_, otherIndex) => otherIndex !== index)
+    this.setState({
+      passwords: newPasswords
+    })
+  }
+
+  handleItemChange = (newItem, index) => {
+    const newPasswords = this.state.passwords.map(function (item, otherIndex) {
+      if (index === otherIndex)
+        item = {
+          name: newItem.name,
+          value: newItem.value
+        }
+      return item
+    })
+    this.setState({passwords: newPasswords})
+  }
+
+  handleItemAdd = (newItem) => {
+    this.setState({
+      passwords: [newItem].concat(this.state.passwords),
+    })
+  }
+
   render() {
     return (
-      <Tabs defaultActiveKey={2} className="App">
+      <Tabs id="main-tabs" defaultActiveKey={2} className="App">
         <Tab eventKey={1} title="Connect" >
         <div>
             <GetFromDropbox onChange={this.encodedContentChange} />
@@ -40,7 +65,11 @@ class App extends Component {
         </div>
         </Tab>
         <Tab title="Passwords" eventKey={2}>
-          <PasswordsList passwords={ this.state.passwords } />
+          <PasswordsList
+            onItemChange={this.handleItemChange}
+            onItemAdd={this.handleItemAdd}
+            passwords={ this.state.passwords }
+            />
         </Tab>
       </Tabs>
     );
