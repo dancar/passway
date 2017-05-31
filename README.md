@@ -6,7 +6,7 @@ PASSWAY
 - [X] Minimal UI
 - [ ] Starting from an empty dataset, defining new passcode
 - [ ] fix css vertical centering somehow
-- [ ] Filtering
+- [X] Filtering
 - [ ] Editing + Saving
 - [X] Retrieve data from Dropbox
 - [ ] Save back to Dropbox

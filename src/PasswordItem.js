@@ -8,17 +8,17 @@ export default class PasswordItem extends Component {
     this.state = {
       expanded: false
     }
-    this.handleOnClick = this.handleOnClick.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
-  handleOnClick (e) {
+  handleClick (e) {
     this.setState({expanded: !this.state.expanded})
   }
 
   render (props) {
     return (
       <div className="password-item" >
-        <Button block onClick={this.handleOnClick} >{this.props.item.name}</Button>
+        <Button block onClick={this.handleClick} >{this.props.item.name}</Button>
         <Panel collapsible expanded={this.state.expanded} style={{visibility: this.state.expanded ? "visible" : "hidden" }} >
           <Table>
             <tr>

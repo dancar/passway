@@ -1,3 +1,7 @@
 .App {
   text-align: center;
 }
+
+.tab-pane {
+  padding: 10px;
+}
