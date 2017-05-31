@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "copy-to-clipboard": "^3.0.6",
     "dropbox": "^2.5.3",
     "openpgp": "^2.5.4",
     "react": "^15.5.4",

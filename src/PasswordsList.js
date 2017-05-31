@@ -11,7 +11,7 @@ class PasswordsList extends React.Component {
   }
 
   filter = (item) => {
-    const filterText = this.state.filterText.trim()
+    const filterText = this.state.filterText.trim().toLowerCase()
     if (filterText.length === 0)
       return true
 
