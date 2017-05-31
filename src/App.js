@@ -32,10 +32,12 @@ class App extends Component {
 
   render() {
     return (
-      <Tabs defaultActiveKey={1} className="App">
+      <Tabs defaultActiveKey={2} className="App">
         <Tab eventKey={1} title="Connect" >
-            {/* <GetFromDropbox onChange={this.encodedContentChange} /> */}
+        <div>
+            <GetFromDropbox onChange={this.encodedContentChange} />
             <Decoder onDecoded={ (decoded) => {this.handleOnDecoded(decoded) } } encodedContent={ this.state.encodedContent }  />
+        </div>
         </Tab>
         <Tab title="Passwords" eventKey={2}>
           <PasswordsList passwords={ this.state.passwords } />
