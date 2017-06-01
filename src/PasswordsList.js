@@ -58,7 +58,10 @@ class PasswordsList extends React.Component {
           />
         <div>
           <div>
-            <Button block onClick={() => this.setState({showAddWindow: true})}><Glyphicon glyph="plus" /></Button>
+            <Button
+              block
+              className="password-list-add"
+              onClick={() => this.setState({showAddWindow: true})}><Glyphicon glyph="plus" /></Button>
             <EditWindow
               title="Add New Item"
               onSubmit={this.addItem}

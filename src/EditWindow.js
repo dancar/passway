@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
 import {Modal, Button, FormControl, ControlLabel, DropdownButton, MenuItem, ButtonGroup} from 'react-bootstrap'
 
 export default class EditWindow extends Component {

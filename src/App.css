@@ -1,7 +1,7 @@
-.App {
-  text-align: center;
+.page-container {
+  padding: 0px 8px;
 }
 
-.tab-pane {
-  padding: 10px;
+input, button, select, textarea , a, h4{
+  font-family: monospace;
 }
