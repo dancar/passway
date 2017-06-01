@@ -27,6 +27,7 @@ class PasswordsList extends React.Component {
       <PasswordItem
         onItemChange={(newState) => this.props.onItemChange(newState, index)}
         key={ item.name + item.value }
+        onDelete={() => this.props.onItemDelete(index)}
         item={item}/>
     )
   }
@@ -55,7 +56,7 @@ class PasswordsList extends React.Component {
           placeholder="Filter"
           onChange={this.handleFilterChange}
           />
-        <div className="well">
+        <div>
           <div>
             <Button block onClick={() => this.setState({showAddWindow: true})}><Glyphicon glyph="plus" /></Button>
             <EditWindow

@@ -30,6 +30,11 @@ export default class PasswordItem extends Component {
     this.props.onItemChange(newState)
   }
 
+  handleDelete = () => {
+    this.setState({showEdit: false})
+    this.props.onDelete()
+  }
+
   render (props) {
     return (
       <div className="password-item" >
@@ -58,6 +63,8 @@ export default class PasswordItem extends Component {
           onHide={() => {this.setState({showEdit: false})}}
           onSubmit={this.handleEditSubmit}
           show={this.state.showEdit}
+          showDelete
+          onDelete={this.handleDelete}
           item={this.props.item}
           />
       </div>

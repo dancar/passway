@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import {Modal, Button, FormControl, ControlLabel} from 'react-bootstrap'
+import React, {Component, PropTypes} from 'react'
+import {Modal, Button, FormControl, ControlLabel, DropdownButton, MenuItem, ButtonGroup} from 'react-bootstrap'
 
 export default class EditWindow extends Component {
   constructor (props) {
@@ -28,10 +28,28 @@ export default class EditWindow extends Component {
     this.setState({[e.target.name]: e.target.value})
   }
 
+  handleHide = () => {
+    this.setState({
+      name: this.state.originalName,
+      value: this.state.originalValue
+    })
+    this.props.onHide()
+  }
+
+  static idCounter = 0
+  static generateId () {
+    return "edit-window-item" + (EditWindow.idCounter++)
+  }
+
+
+  displayOptions () {
+    return this.props.showDelete ? "block" : "none"
+  }
+
   render () {
     return (
       <Modal
-        onHide={this.props.onHide}
+        onHide={this.handleHide}
         show={this.props.show} >
         <Modal.Header closeButton>
           <Modal.Title>{this.props.title || "Edit"}</Modal.Title>
@@ -63,9 +81,23 @@ export default class EditWindow extends Component {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button type="submit" onClick={this.handleSubmit}>Save</Button>
+          <div style={{display: this.displayOptions(), float: "left"}} >
+          <DropdownButton
+            title="Options"
+            id={EditWindow.generateId()}>
+
+            <MenuItem eventKey="1"
+                      onClick={this.props.onDelete}
+                      > Delete </MenuItem>
+
+          </DropdownButton></div>
+
+          <Button
+            type="submit"
+            bsStyle="primary"
+            onClick={this.handleSubmit}>Save</Button>
         </Modal.Footer>
       </Modal>
-  )
+    )
   }
 }

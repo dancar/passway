@@ -67,6 +67,7 @@ class App extends Component {
         <Tab title="Passwords" eventKey={2}>
           <PasswordsList
             onItemChange={this.handleItemChange}
+            onItemDelete={this.handleItemDelete}
             onItemAdd={this.handleItemAdd}
             passwords={ this.state.passwords }
             />
