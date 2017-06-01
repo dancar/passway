@@ -4,12 +4,18 @@ import GetFromDropbox from './GetFromDropbox.js'
 import Decoder from './Decoder.js'
 import PasswordsList from './PasswordsList.js'
 import PasswayNavbar from './PasswayNavbar.js'
+import CreatePassword from './CreatePasscode.js'
 import {Tabs, Tab} from 'react-bootstrap'
+
+const STEP_MAIN = 3
+const STEP_CREATE_PASSCODE = 2
+const STEP_LOAD = 4
 
 class App extends Component {
   constructor () {
     super()
     this.state = {
+      step: STEP_CREATE_PASSCODE,
       passwords: [
         {name: 'Kennedy RSA anthrax', value: 'Security Consulting Airport Anonymous Wildfire MS13 FBIS Ingram Mac-10 Egret Trump Commecen DITSA PLA'},
         {name: 'MOIS Standford MCI Whitehouse', value: '$400 million in gold bullion Gang SRI Cap-Stun Tehrik-i-Taliban Pakistan Homeland Defense Southwest Duress World News Transportation security cracking'},
@@ -63,22 +69,57 @@ class App extends Component {
     })
   }
 
+
+  handlePasscodeCreate = (passcode) => {
+    this.setState({
+      passcode,
+      passwords: [],
+      step: STEP_MAIN
+    })
+  }
+
+  renderCurrentStep = () => {
+    switch (this.state.step){
+    case STEP_MAIN:
+      return this.renderMainStep()
+    case STEP_CREATE_PASSCODE:
+      return this.renderCreatePasscodeStep()
+    }
+  }
+
+  renderMainStep = () => {
+    return (
+      <PasswordsList
+        onItemChange={this.handleItemChange}
+        onItemDelete={this.handleItemDelete}
+        onItemAdd={this.handleItemAdd}
+        passwords={ this.state.passwords }
+        />
+    )
+  }
+
+  renderCreatePasscodeStep = () => {
+    return (
+      <CreatePassword onSubmit={this.handlePasscodeCreate} />
+    )
+  }
+
+  renderSettings = () => {
+    return (
+      <div>
+        <GetFromDropbox onChange={this.encodedContentChange} />
+        <Decoder onDecoded={ (decoded) => {this.handleOnDecoded(decoded) } } encodedContent={ this.state.encodedContent }  />
+      </div>
+    )
+  }
+
   render() {
     return (
       <div>
         <PasswayNavbar />
         <div  className="page-container">
-          <div style={{display: "none"}}>
-            <GetFromDropbox onChange={this.encodedContentChange} />
-            <Decoder onDecoded={ (decoded) => {this.handleOnDecoded(decoded) } } encodedContent={ this.state.encodedContent }  />
-          </div>
-          <PasswordsList
-            onItemChange={this.handleItemChange}
-            onItemDelete={this.handleItemDelete}
-            onItemAdd={this.handleItemAdd}
-            passwords={ this.state.passwords }
-            />
-          </div>
+          { this.renderCurrentStep() }
+        </div>
       </div>
     );
   }
