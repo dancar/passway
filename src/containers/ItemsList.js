@@ -1,10 +1,11 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import './ItemsList.css'
 import {FormControl, Button, Glyphicon} from 'react-bootstrap'
-import Item from './Item'
-import EditWindow from './EditWindow.js'
+import Item from '../components/Item'
+import EditWindow from '../components/EditWindow.js'
 
-export default class ItemsList extends React.Component {
+class ItemsList extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -76,3 +77,11 @@ export default class ItemsList extends React.Component {
   }
 
 }
+
+const mapStateToProps = (state) => {
+  return {
+    items: state.items
+  }
+}
+
+export default connect(mapStateToProps)(ItemsList)

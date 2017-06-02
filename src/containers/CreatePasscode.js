@@ -1,12 +1,18 @@
+import { connect } from 'react-redux'
 import React, {Component} from 'react'
 import {Button, Form, FormControl, ControlLabel} from 'react-bootstrap'
+import {push} from 'react-router-redux'
+
+import {setPasscode} from '../actions'
 import './CreatePasscode.css'
-export default class CreatePassword extends Component {
+
+class CreatePasscode extends Component {
 
   constructor (props) {
     super(props)
     this.state = {
-      passcode: ""
+      passcode: "",
+      passcode2: ""
     }
   }
 
@@ -19,7 +25,7 @@ export default class CreatePassword extends Component {
   }
 
   passcodeOk = () => {
-    return (this.state.passcode || "").length > 8
+    return (this.state.passcode || "").length > 0 // TODO SOMETHING
   }
 
   passcode2Ok = () => {
@@ -64,6 +70,16 @@ export default class CreatePassword extends Component {
         </Form>
       </div>
     )
-
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSubmit: (newPasscode) => {
+      dispatch(setPasscode(newPasscode))
+      dispatch(push('/list'))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(CreatePasscode)
