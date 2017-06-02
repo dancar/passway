@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux'
-import { routerReducer } from 'react-router-redux'
 
 const visibleItems = (state = [], action) => {
   return state
@@ -30,11 +29,9 @@ const items = (state = DEVELOPMENT_DATA, action) => {
         return action.item
       return item
     })
-  console.log('index.js\\ 32: state:', state);
   return state
 }
 
 export default combineReducers({
-  items, visibleItems, passcode,
-  router: routerReducer
+  items, visibleItems, passcode
 })

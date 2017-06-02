@@ -6,6 +6,9 @@ PASSWAY
 - [X] Minimal UI
 - [X] Starting from an empty dataset, defining new passcode
 - [ ] Changing existing passcode
+- [ ] redirect away from /list if there's no valid passcode
+- [?] redux
+- [X] react-redirect
 - [ ] Fix Add new bug which doesn't clear last added
 - [ ] Fix bug when changing an item, it collapses
 - [ ] Form validation: no empty name

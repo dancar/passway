@@ -1,9 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import './ItemsList.css'
 import {FormControl, Button, Glyphicon} from 'react-bootstrap'
+
+import {addItem, changeItem, deleteItem} from '../actions'
 import Item from '../components/Item'
 import EditWindow from '../components/EditWindow.js'
+import './ItemsList.css'
 
 class ItemsList extends React.Component {
   constructor (props) {
@@ -84,4 +86,19 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(ItemsList)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onItemAdd: (newItem) => {
+      dispatch(addItem(newItem))
+    },
+
+    onItemChange: (item, index) => {
+      dispatch(changeItem(item, index))
+    },
+
+    onItemDelete: (index) => {
+      dispatch(deleteItem(index))
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ItemsList)
