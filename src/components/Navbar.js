@@ -1,8 +1,8 @@
 import React from 'react'
-import {Navbar, Nav, NavItem, ButtonToolbar, Button} from 'react-bootstrap'
-import './PasswayNavbar.css'
+import {Nav, NavItem, ButtonToolbar, Button} from 'react-bootstrap'
+import './Navbar.css'
 
-export default class PasswayNavbar extends React.Component {
+export default class Navbar extends React.Component {
   render () {
     return (
       <div className="passway-navbar">

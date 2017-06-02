@@ -1,0 +1,30 @@
+import { combineReducers } from 'redux'
+
+const visibleItems = (state = [], action) => {
+  return state
+}
+
+const passcode = (state = null , action) => {
+  if (action.type === 'SET_PASSCODE') {
+    return action.newPasscode
+  }
+  return state
+}
+
+const items = (state = [], action) => {
+  if (action.type === 'ADD_ITEM')
+    return [...state, action.item]
+  if (action.type === 'DELETE_ITEM')
+    return state.filter((item, index) => index !== action.index)
+  if (action.type === 'CHANGE_ITEM')
+    return state.map((item, index) => {
+      if (index === action.index)
+        return action.item
+      return item
+    })
+  return state
+}
+
+export default combineReducers({
+  items, visibleItems, passcode
+})

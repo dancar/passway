@@ -1,5 +1,4 @@
 import React from 'react'
-import './PasswordsList.css'
 import {Button, Form, FormControl, ControlLabel} from 'react-bootstrap'
 import * as openpgp from 'openpgp';
 import './Decoder.css'

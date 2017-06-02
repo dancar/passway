@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 import {Button, Panel, Glyphicon} from 'react-bootstrap'
 import copy from 'copy-to-clipboard'
-import './PasswordItem.css'
+import './Item.css'
 import EditWindow from './EditWindow.js'
 
-export default class PasswordItem extends Component {
+export default class Item extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -37,22 +37,22 @@ export default class PasswordItem extends Component {
 
   render (props) {
     return (
-      <div className="password-item" >
+      <div className="item" >
         <Button block onClick={this.handleHeaderClick} >{this.props.item.name}</Button>
         <Panel collapsible expanded={this.state.expanded} style={{visibility: this.state.expanded ? "visible" : "hidden" }} >
-          <div className="password-item-main">
+          <div className="item-main">
             {this.props.item.value}
           </div>
 
           <Button
             onClick={this.handleEditClick}
-            className="password-item-button"
+            className="item-button"
             bsSize="small" >
             <Glyphicon glyph="pencil" />
           </Button>
 
           <Button
-            className="password-item-button"
+            className="item-button"
             onClick={this.handleCopyClick}
             bsSize="small" >
             <Glyphicon glyph="copy" />

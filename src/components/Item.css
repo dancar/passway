@@ -1,18 +1,18 @@
-.password-item-main {
+.item-main {
   flex: 1;
 }
 
-.password-item-button {
+.item-button {
   margin-left: 5px;
 }
 
-.password-item {
+.item {
   display: block;
   margin-top: 6px;
 
 }
 
-.password-item .panel-body {
+.item .panel-body {
   display: flex;
   align-items: center;
 }

@@ -1,11 +1,10 @@
 import React from 'react'
-import './PasswordsList.css'
+import './ItemsList.css'
 import {FormControl, Button, Glyphicon} from 'react-bootstrap'
-import PasswordItem from './PasswordItem'
-import './PasswordsList.css'
+import Item from './Item'
 import EditWindow from './EditWindow.js'
 
-class PasswordsList extends React.Component {
+export default class ItemsList extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -24,7 +23,7 @@ class PasswordsList extends React.Component {
 
   createItem = (item, index) => {
     return (
-      <PasswordItem
+      <Item
         onItemChange={(newState) => this.props.onItemChange(newState, index)}
         key={ item.name + item.value }
         onDelete={() => this.props.onItemDelete(index)}
@@ -55,12 +54,13 @@ class PasswordsList extends React.Component {
           value={this.state.filterText}
           placeholder="Filter"
           onChange={this.handleFilterChange}
+          style={{display: this.props.items.length > 0 ? "block" : "none"}}
           />
         <div>
           <div>
             <Button
               block
-              className="password-list-add"
+              className="items-list-add"
               onClick={() => this.setState({showAddWindow: true})}><Glyphicon glyph="plus" /></Button>
             <EditWindow
               title="Add New Item"
@@ -68,7 +68,7 @@ class PasswordsList extends React.Component {
               onHide={() => this.setState({showAddWindow: false, emptyNewItem: {}})}
               show={this.state.showAddWindow}
               item={this.state.emptyNewItem} />
-          { this.props.passwords.filter(this.filter).map(this.createItem) }
+          { this.props.items.filter(this.filter).map(this.createItem) }
           </div>
         </div>
       </div>
@@ -76,5 +76,3 @@ class PasswordsList extends React.Component {
   }
 
 }
-
-export default PasswordsList
