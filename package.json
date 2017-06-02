@@ -8,7 +8,8 @@
     "openpgp": "^2.5.4",
     "react": "^15.5.4",
     "react-bootstrap": "^0.31.0",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.5"
   },
   "devDependencies": {
     "react-scripts": "1.0.6"

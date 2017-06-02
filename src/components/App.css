@@ -1,3 +1,7 @@
+#root {
+  max-width: 800px;
+  margin: auto;
+}
 .page-container {
   padding: 0px 8px;
 }
