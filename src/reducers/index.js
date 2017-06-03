@@ -7,14 +7,7 @@ const passcode = (state = null , action) => {
   return state
 }
 
-const DEVELOPMENT_DATA = [
-        {name: 'MOIS Standford MCI Whitehouse', value: '$400 million in gold bullion Gang SRI Cap-Stun Tehrik-i-Taliban Pakistan Homeland Defense Southwest Duress World News Transportation security cracking'},
-        {name: 'Suicide attack Waco', value: ' Texas weapons of mass destruction halcon keyhole terrorist EO UT/RUS Attack SABC Screening IDP Trump M.P.R.I. Uzbekistan'},
-        {name: 'China CDMA', value: 'clones Port Authority SAPO Cyber attack Environmental terrorist GIGN undercover Speakeasy Stranded sigvoice Bruxelles AQAP TSA'},
-        {name: 'Great Item 1', value: '-890375258183733390'}
-      ]
-
-const items = (state = DEVELOPMENT_DATA, action) => {
+const items = (state = null, action) => {
   if (action.type === 'ADD_ITEM')
     return [...state, action.item]
   if (action.type === 'DELETE_ITEM')
@@ -25,9 +18,19 @@ const items = (state = DEVELOPMENT_DATA, action) => {
         return action.item
       return item
     })
+  if (action.type === 'SET_PASSCODE' && state === null) {
+    // if a new passcode has been set, init empty list
+    return []
+  }
+  return state
+}
+
+const encryptedContent = (state = localStorage.encryptedContent || null, action) => {
   return state
 }
 
 export default combineReducers({
-  items, passcode
+  items,
+  passcode,
+  encryptedContent
 })

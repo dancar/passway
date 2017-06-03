@@ -7,10 +7,10 @@ PASSWAY
 - [X] Starting from an empty dataset, defining new passcode
 - [ ] Changing existing passcode
 - [ ] redirect away from /list if there's no valid passcode
-- [?] redux
-- [X] react-redirect
-- [ ] Fix Add new bug which doesn't clear last added
-- [ ] Fix bug when changing an item, it collapses
+- [X] redux
+- [X] react-router
+- [X] Fix Add new bug which doesn't clear last added
+- [X] Fix bug when changing an item, it collapses
 - [ ] Form validation: no empty name
 - [ ] Experiment: maybe color theme with lots of colors for items
 - [ ] Indication of successful copy / remove / add/ change, etc
@@ -31,7 +31,8 @@ PASSWAY
 - [X] Persistence of authkey, maybe data as well
 - [ ] Handle Synchronization smurtly
 - [ ] Code Style
-  - [ ] remove "password", use "item" ?
+  - [X] remove "password", use "item" ?
   - [ ] consistent this in methods
 - [ ] Maybe nicer editing (inline, without popup)
 - [ ] Keypad when entering passcode?
+- [ ] multiple delete

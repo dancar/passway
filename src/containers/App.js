@@ -9,13 +9,15 @@ import {Route, Switch, Redirect} from 'react-router-dom'
 
 class App extends Component {
 
-  hasPasscode = () => {
-    const passcode = this.props.passcode
-
-    return passcode && passcode.length > 0
-  }
   renderRedirection = () => {
-    let to = this.hasPasscode() ? '/list' : '/create-passcode'
+    const hasPasscode = this.props.passcode,
+          hasItems = this.props.hasItems,
+          hasEncryptedContent = this.hasEncryptedContent
+
+    let to = '/list'
+    if (!hasPasscode)
+      to = hasEncryptedContent ? '/enter-passcode' : '/create-passcode'
+
     return (
       <Redirect to={to} />
     )
@@ -37,11 +39,14 @@ class App extends Component {
       </div>
     )
   }
+
 }
 
 const mapStateToProps = (state) => {
   return {
-    passcode: state.passcode
+    passcode: state.passcode,
+    hasItems: !!state.items,
+    hasEncryptedContent: !!state.encryptedContent
   }
 }
 
