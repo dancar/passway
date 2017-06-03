@@ -1,9 +1,5 @@
 import { combineReducers } from 'redux'
 
-const visibleItems = (state = [], action) => {
-  return state
-}
-
 const passcode = (state = null , action) => {
   if (action.type === 'SET_PASSCODE') {
     return action.newPasscode
@@ -33,5 +29,5 @@ const items = (state = DEVELOPMENT_DATA, action) => {
 }
 
 export default combineReducers({
-  items, visibleItems, passcode
+  items, passcode
 })

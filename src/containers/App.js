@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import './App.css';
-import ItemsList from './ItemsList.js'
+import ItemsList from '../containers/ItemsList.js'
 import CreatePasscode from './CreatePasscode.js'
 import Navbar from '../components/Navbar.js'
 import {Route, Switch, Redirect} from 'react-router-dom'
@@ -27,7 +27,7 @@ class App extends Component {
         <Navbar />
         <div  className="page-container">
           <Switch>
-            <Route exact path="/list" component={ItemsList} />
+            <Route path="/list" component={ItemsList} />
             <Route exact path="/create-passcode" component={CreatePasscode} />
             <Route path="*" >
               { this.renderRedirection() }

@@ -12,6 +12,10 @@
 
 }
 
+.item .panel {
+  margin-bottom: 8px;
+}
+
 .item .panel-body {
   display: flex;
   align-items: center;

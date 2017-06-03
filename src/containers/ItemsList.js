@@ -1,18 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {FormControl, Button, Glyphicon} from 'react-bootstrap'
+import { Route } from 'react-router'
+import { Link } from 'react-router-dom'
+import { FormControl, Button, Glyphicon } from 'react-bootstrap'
 
-import {addItem, changeItem, deleteItem} from '../actions'
 import Item from '../components/Item'
-import EditWindow from '../components/EditWindow.js'
+import EditItem from '../containers/EditItem.js'
+import AddItem from '../containers/AddItem.js'
 import './ItemsList.css'
 
 class ItemsList extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      filterText: "",
-      emptyNewItem: {}
+      filterText: ""
     }
   }
 
@@ -24,60 +25,45 @@ class ItemsList extends React.Component {
     return item.name.toLowerCase().indexOf(filterText) > -1
   }
 
-  createItem = (item, index) => {
+  renderItem = (item, index) => {
     return (
       <Item
         onItemChange={(newState) => this.props.onItemChange(newState, index)}
         key={ item.name + item.value }
         onDelete={() => this.props.onItemDelete(index)}
+        index={ index }
         item={item}/>
     )
-  }
-
-  handleFilterChange = (event) => {
-    this.setState({
-      filterText: event.target.value
-    })
-  }
-
-  addItem = (newItem) => {
-    this.setState({
-      showAddWindow: false,
-      emptyNewItem: {}
-    })
-    this.props.onItemAdd(newItem)
   }
 
   render (props) {
     return (
       <div>
-        <FormControl
-          type="text"
-          className="filter"
-          value={this.state.filterText}
-          placeholder="Filter"
-          onChange={this.handleFilterChange}
-          style={{display: this.props.items.length > 0 ? "block" : "none"}}
-          />
-        <div>
-          <div>
-            <Button
-              block
-              className="items-list-add"
-              onClick={() => this.setState({showAddWindow: true})}><Glyphicon glyph="plus" /></Button>
-            <EditWindow
-              title="Add New Item"
-              onSubmit={this.addItem}
-              onHide={() => this.setState({showAddWindow: false, emptyNewItem: {}})}
-              show={this.state.showAddWindow}
-              item={this.state.emptyNewItem} />
-          { this.props.items.filter(this.filter).map(this.createItem) }
-          </div>
-        </div>
+        <Route path="/list/:index/edit" component={ EditItem } />
+        <Route path="/list/add" component={ AddItem } />
+
+        { this.props.items.length > 1  &&
+          (
+            <FormControl
+              type="text"
+              className="filter"
+              value={this.state.filterText}
+              placeholder="Filter"
+              onChange={ e => this.setState({filterText: e.target.value}) }
+              />
+          )
+        }
+
+        <Link to="/list/add">
+          <Button block className="items-list-add" >
+            <Glyphicon glyph="plus" />
+          </Button>
+        </Link>
+
+        { this.props.items.filter(this.filter).map(this.renderItem) }
       </div>
     )
   }
-
 }
 
 const mapStateToProps = (state) => {
@@ -86,19 +72,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onItemAdd: (newItem) => {
-      dispatch(addItem(newItem))
-    },
-
-    onItemChange: (item, index) => {
-      dispatch(changeItem(item, index))
-    },
-
-    onItemDelete: (index) => {
-      dispatch(deleteItem(index))
-    }
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(ItemsList)
+export default connect(mapStateToProps)(ItemsList)

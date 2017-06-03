@@ -9,3 +9,7 @@
 input, button, select, textarea , a, h4{
   font-family: monospace;
 }
+
+a:hover {
+  text-decoration: none;
+}

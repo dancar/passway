@@ -1,23 +1,16 @@
 import React, {Component} from 'react'
-import {Modal, Button, FormControl, ControlLabel, DropdownButton, MenuItem, ButtonGroup} from 'react-bootstrap'
+import {Modal, Button, FormControl, ControlLabel, DropdownButton, MenuItem } from 'react-bootstrap'
 
 export default class EditWindow extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      name: props.item.name || "",
-      value: props.item.value || "",
-      originalName: props.item.name || "",
-      originalValue: props.item.value || ""
+      name: props.item.name,
+      value: props.item.value,
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleSubmit () {
-    this.setState({
-      originalName: this.state.name,
-      originalValue: this.state.value
-    })
+  handleSubmit = () => {
     this.props.onSubmit({
       name: this.state.name,
       value: this.state.value
@@ -28,31 +21,17 @@ export default class EditWindow extends Component {
     this.setState({[e.target.name]: e.target.value})
   }
 
-  handleHide = () => {
-    this.setState({
-      name: this.state.originalName,
-      value: this.state.originalValue
-    })
-    this.props.onHide()
-  }
-
-  static idCounter = 0
-  static generateId () {
-    return "edit-window-item" + (EditWindow.idCounter++)
-  }
-
-
   displayOptions () {
-    return this.props.showDelete ? "block" : "none"
+    return
   }
 
   render () {
     return (
       <Modal
-        onHide={this.handleHide}
+        onHide={this.props.onHide}
         show={this.props.show} >
         <Modal.Header closeButton>
-          <Modal.Title>{this.props.title || "Edit"}</Modal.Title>
+          <Modal.Title>{this.props.title}</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
@@ -81,10 +60,13 @@ export default class EditWindow extends Component {
         </Modal.Body>
 
         <Modal.Footer>
-          <div style={{display: this.displayOptions(), float: "left"}} >
+          <div style={ {
+                 display: this.props.showDelete ? 'block' : 'none',
+                 float: 'left'
+               }} >
           <DropdownButton
             title="Options"
-            id={EditWindow.generateId()}>
+            id="edit-window-options">
 
             <MenuItem eventKey="1"
                       onClick={this.props.onDelete}
