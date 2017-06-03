@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Route } from 'react-router'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { FormControl, Button, Glyphicon } from 'react-bootstrap'
 
 import Item from '../components/Item'
@@ -37,6 +37,10 @@ class ItemsList extends React.Component {
   }
 
   render (props) {
+    if (!this.props.items)
+      return (
+        <Redirect to="/" />
+      )
     return (
       <div>
         <Route path="/list/:index/edit" component={ EditItem } />
@@ -66,7 +70,7 @@ class ItemsList extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     items: state.items
   }

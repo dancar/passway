@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { push } from 'react-router-redux'
 import EditWindow from '../components/EditWindow.js'
 import {changeItem, deleteItem} from '../actions'
 
@@ -7,24 +8,21 @@ const getIndex = ownProps => parseInt(ownProps.match.params.index, 10)
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   const index = getIndex(ownProps)
-  const goBack = () => {
-    const itemUrl = `/list/${index}`
-    ownProps.history.push(itemUrl)
-  }
+  const itemUrl = `/list/${index}`
 
   return {
     onSubmit: (itemData ) => {
       dispatch(changeItem(itemData, index))
-      goBack()
+      dispatch(push(itemUrl))
     },
 
     onHide: () => {
-      goBack()
+      dispatch(push(itemUrl))
     },
 
     onDelete: () => {
       dispatch(deleteItem(index))
-      ownProps.history.push('/list')
+      dispatch(push('/list'))
     }
   }
 }

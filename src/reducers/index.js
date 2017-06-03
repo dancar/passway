@@ -1,5 +1,3 @@
-import { combineReducers } from 'redux'
-
 const passcode = (state = null , action) => {
   if (action.type === 'SET_PASSCODE') {
     return action.newPasscode
@@ -20,6 +18,7 @@ const items = (state = null, action) => {
     })
   if (action.type === 'SET_PASSCODE' && state === null) {
     // if a new passcode has been set, init empty list
+    // TODO: if there is encrypted content, try decrypting it first
     return []
   }
   return state
@@ -29,8 +28,8 @@ const encryptedContent = (state = localStorage.encryptedContent || null, action)
   return state
 }
 
-export default combineReducers({
+export default {
   items,
   passcode,
   encryptedContent
-})
+}

@@ -1,21 +1,19 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { push } from 'react-router-redux'
+
 import EditWindow from '../components/EditWindow.js'
 import { addItem } from '../actions'
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  const goBack = () => {
-    ownProps.history.push('/list')
-  }
-
   return {
     onSubmit: (itemData ) => {
       dispatch(addItem(itemData))
-      goBack()
+      dispatch(push('/list'))
     },
 
     onHide: () => {
-      goBack()
+      dispatch(push('/list'))
     },
 
     item: {

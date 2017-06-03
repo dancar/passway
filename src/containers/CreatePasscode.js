@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
-import React, {Component} from 'react'
-import {Button, Form, FormControl, ControlLabel} from 'react-bootstrap'
-import {push} from 'react-router-redux'
+import React, { Component } from 'react'
+import { Button, Form, FormControl, ControlLabel } from 'react-bootstrap'
+import { push } from 'react-router-redux'
 
 import {setPasscode} from '../actions'
 import './CreatePasscode.css'
