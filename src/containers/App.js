@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import './App.css';
 import ItemsList from '../containers/ItemsList.js'
 import CreatePasscode from './CreatePasscode.js'
+import EnterPasscode from './EnterPasscode.js'
 import Navbar from '../components/Navbar.js'
 import {Route, Switch, Redirect} from 'react-router-dom'
 
@@ -12,7 +13,7 @@ class App extends Component {
   renderRedirection = () => {
     const hasPasscode = this.props.passcode,
           hasItems = this.props.hasItems,
-          hasEncryptedContent = this.hasEncryptedContent
+          hasEncryptedContent = this.props.hasEncryptedContent
 
     let to = '/list'
     if (!hasPasscode)
@@ -31,6 +32,7 @@ class App extends Component {
           <Switch>
             <Route path="/list" component={ItemsList} />
             <Route exact path="/create-passcode" component={CreatePasscode} />
+            <Route exact path="/enter-passcode" component={EnterPasscode} />
             <Route path="*" >
               { this.renderRedirection() }
             </Route>

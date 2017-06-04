@@ -11,6 +11,14 @@ export const addItem = (item) => {
     item
   }
 }
+
+export const setItems = (items) => {
+  return {
+    type: 'SET_ITEMS',
+    items
+  }
+}
+
 export const deleteItem = (index) => {
   return {
     type: 'DELETE_ITEM',

@@ -77,7 +77,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onSubmit: (newPasscode) => {
       dispatch(setPasscode(newPasscode))
-      dispatch(push('/list'))
+      dispatch(push('/'))
     }
   }
 }
