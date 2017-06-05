@@ -1,3 +1,5 @@
+import dropbox from './dropbox.js'
+
 const passcode = (state = null , action) => {
   if (action.type === 'SET_PASSCODE') {
     return action.newPasscode
@@ -30,33 +32,24 @@ const items = (state = null, action) => {
   return state
 }
 
-const encryptedContent = (state = localStorage.encryptedContent || null, action) => {
+const encryptedContent = (state, action) => {
   if (action.type === 'NEW_ENCRYPTED_CONTENT') {
-    localStorage.encryptedContent = action.encryptedItems
+    localStorage.encryptedContent = JSON.stringify(Array.from(action.encryptedItems))
     return action.encryptedItems
   }
-  return state
-}
 
-const settings = (state = JSON.parse(localStorage.settings || '{}'), action) => {
-  if (action.type === 'SET_SETTINGS') {
-    const newSettings= Object.assign({}, state, action.settings)
-    localStorage.settings = JSON.stringify(newSettings)
-    return newSettings
+  if (state === undefined) {
+    return localStorage.encryptedContent ?
+      Uint8Array.from(JSON.parse(localStorage.encryptedContent))
+      : null
   }
-  return state
-}
 
-const dropbox = (state = {authUrl: ""}, action) => {
-  if (action.type === 'DROPBOX_SET_AUTH_URL')
-    return Object.assign({}, state, {authUrl: action.url})
   return state
 }
 
 export default {
   items,
   passcode,
-  settings,
   dropbox,
   encryptedContent
 }

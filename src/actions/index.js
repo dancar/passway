@@ -34,9 +34,9 @@ export const changeItem = (item, index) => {
   }
 }
 
-export const setSettings = (settings) => {
+export const dropboxSetSettings = (settings) => {
   return {
-    type: 'SET_SETTINGS',
+    type: 'DROPBOX_SET_SETTINGS',
     settings
   }
 }

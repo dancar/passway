@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import DropboxIntegration from '../containers/DropboxIntegration.js'
+import DropboxStatus from '../containers/DropboxStatus.js'
 import './Navbar.css'
 
 export default class Navbar extends React.Component {
@@ -12,7 +12,7 @@ export default class Navbar extends React.Component {
           <Link to={ '/' }> Passway </Link>
         </div>
         <div className="passway-navbar-right">
-          <DropboxIntegration />
+          <DropboxStatus />
           <Link to={ '/settings' }>Settings </Link>
         </div>
       </div>

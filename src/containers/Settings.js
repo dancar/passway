@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Route } from 'react-router'
 import { Form, FormGroup, InputGroup, Button, Checkbox, FormControl} from 'react-bootstrap'
 
-import {setSettings} from '../actions'
+import {dropboxSetSettings} from '../actions'
 const DROPBOX_ACCSES_KEY_LENGTH = 64
 class Settings extends React.Component {
   constructor (props) {
@@ -30,7 +30,7 @@ class Settings extends React.Component {
         <h4> Settings </h4>
           <Checkbox
             checked={ !!this.props.dropboxOn }
-            onChange={ (e) => this.props.setSettings({dropboxOn: e.target.checked}) }
+            onChange={ (e) => this.props.dropboxSetSettings({dropboxOn: e.target.checked}) }
             >Sync to Dropbox </Checkbox>
           { this.props.dropboxOn && (
             <table style={ {width: '100%', margin: 'auto', background: 'none'} }>
@@ -45,13 +45,13 @@ class Settings extends React.Component {
                   />
                 </td>
                 <td style={ {textAlign: "center" } }>
-                  <Button onClick={ () => this.props.setSettings({dropboxAccessKey: this.state.dropboxAccessKey }) }
+                  <Button onClick={ () => this.props.dropboxSetSettings({dropboxAccessKey: this.state.dropboxAccessKey }) }
                     disabled={ !this.state.dropboxAllowSaveAccessKey }>Save </Button>
                   </td>
               </tr>
               <tr>
-                <td style={ { paddingTop: '20px' } }>
-                  <a target="_new" href={ this.props.dropboxAuthLink } > Get Access Key </a>
+                <td colSpan={2} style={ { textAlign: "center", paddingTop: '20px' } }>
+                  <a target="_new" href={ this.props.dropboxAuthLink } > Get Access Token </a>
                 </td>
               </tr>
               </tbody>
@@ -67,16 +67,15 @@ class Settings extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    settings: state.settings,
     dropboxAuthLink: state.dropbox.authUrl,
-    dropboxAccessKey: state.settings.dropboxAccessKey,
-    dropboxOn: state.settings.dropboxOn
+    dropboxAccessKey: state.dropbox.dropboxAccessKey,
+    dropboxOn: state.dropbox.dropboxOn
   }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    setSettings: (settings) => {
-      dispatch(setSettings(settings))
+    dropboxSetSettings: (settings) => {
+      dispatch(dropboxSetSettings(settings))
     }
   }
 }

@@ -8,6 +8,7 @@ import EnterPasscode from './EnterPasscode.js'
 import Navbar from '../components/Navbar.js'
 import Settings from './Settings.js'
 import {Route, Switch, Redirect} from 'react-router-dom'
+import DropboxIntegration from '../DropboxIntegration.js' //TODO relocate file
 
 class App extends Component {
 
@@ -28,6 +29,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <DropboxIntegration />
         <Navbar />
         <div  className="page-container">
           <Switch>
@@ -55,7 +57,9 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch, state) => {
-  return {}
+  return {
+
+  }
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))
