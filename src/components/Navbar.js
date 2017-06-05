@@ -1,4 +1,6 @@
 import React from 'react'
+
+import DropboxIntegration from '../containers/DropboxIntegration.js'
 import './Navbar.css'
 
 export default class Navbar extends React.Component {
@@ -9,6 +11,7 @@ export default class Navbar extends React.Component {
           <a href="/"> Passway </a>
         </div>
         <div className="passway-navbar-right">
+          <DropboxIntegration />
           <a href="/settings">Settings </a>
         </div>
       </div>

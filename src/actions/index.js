@@ -33,3 +33,17 @@ export const changeItem = (item, index) => {
     index
   }
 }
+
+export const setSettings = (settings) => {
+  return {
+    type: 'SET_SETTINGS',
+    settings
+  }
+}
+
+export const dropboxSetAuthUrl = (url) => {
+  return {
+    type: 'DROPBOX_SET_AUTH_URL',
+    url
+  }
+}

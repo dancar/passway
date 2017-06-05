@@ -23,6 +23,8 @@ PASSWAY
 - [ ] Include the Bootstrap css in the folder, including glyphs
 - [ ] Save back to Dropbox
 - [ ] Error handling
+  - [ ] When sending / receiving dropbox
+  - [ ] When encoding / decoding with passcode
 - [ ] Transaction UI Indication ("waiting...")
 - [ ] Tests
 - [X] Decrypt

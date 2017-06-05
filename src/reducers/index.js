@@ -38,8 +38,22 @@ const encryptedContent = (state = localStorage.encryptedContent || null, action)
   return state
 }
 
+const settings = (state = {}, action) => {
+  if (action.type === 'SET_SETTINGS')
+    return action.settings
+  return state
+}
+
+const dropbox = (state = {authUrl: ""}, action) => {
+  if (action.type === 'DROPBOX_SET_AUTH_URL')
+    return Object.assign({}, state, {authUrl: action.url})
+  return state
+}
+
 export default {
   items,
   passcode,
+  settings,
+  dropbox,
   encryptedContent
 }

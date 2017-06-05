@@ -6,6 +6,7 @@ import ItemsList from '../containers/ItemsList.js'
 import CreatePasscode from './CreatePasscode.js'
 import EnterPasscode from './EnterPasscode.js'
 import Navbar from '../components/Navbar.js'
+import Settings from './Settings.js'
 import {Route, Switch, Redirect} from 'react-router-dom'
 
 class App extends Component {
@@ -30,6 +31,7 @@ class App extends Component {
         <Navbar />
         <div  className="page-container">
           <Switch>
+            <Route path="/settings" component={Settings} />
             <Route path="/list" component={ItemsList} />
             <Route exact path="/create-passcode" component={CreatePasscode} />
             <Route exact path="/enter-passcode" component={EnterPasscode} />
