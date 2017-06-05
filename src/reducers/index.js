@@ -38,9 +38,12 @@ const encryptedContent = (state = localStorage.encryptedContent || null, action)
   return state
 }
 
-const settings = (state = {}, action) => {
-  if (action.type === 'SET_SETTINGS')
-    return action.settings
+const settings = (state = JSON.parse(localStorage.settings || '{}'), action) => {
+  if (action.type === 'SET_SETTINGS') {
+    const newSettings= Object.assign({}, state, action.settings)
+    localStorage.settings = JSON.stringify(newSettings)
+    return newSettings
+  }
   return state
 }
 

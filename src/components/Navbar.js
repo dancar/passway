@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import DropboxIntegration from '../containers/DropboxIntegration.js'
 import './Navbar.css'
@@ -8,11 +9,11 @@ export default class Navbar extends React.Component {
     return (
       <div className="passway-navbar">
         <div className="passway-brand">
-          <a href="/"> Passway </a>
+          <Link to={ '/' }> Passway </Link>
         </div>
         <div className="passway-navbar-right">
           <DropboxIntegration />
-          <a href="/settings">Settings </a>
+          <Link to={ '/settings' }>Settings </Link>
         </div>
       </div>
     )

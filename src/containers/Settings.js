@@ -3,12 +3,25 @@ import { connect } from 'react-redux'
 import { Route } from 'react-router'
 import { Form, FormGroup, InputGroup, Button, Checkbox, FormControl} from 'react-bootstrap'
 
+import {setSettings} from '../actions'
+const DROPBOX_ACCSES_KEY_LENGTH = 64
 class Settings extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      dropboxOn: this.props.dropboxOn
+      dropboxOn: this.props.dropboxOn,
+      dropboxAccessKey: this.props.dropboxAccessKey || "",
+      dropboxAllowSaveAccessKey: false,
     }
+  }
+
+  handleDropboxOnChange = (e) => {
+    const accessKey = e.target.value
+    const allowSave = accessKey.length === DROPBOX_ACCSES_KEY_LENGTH
+    this.setState({
+      dropboxAccessKey: accessKey,
+      dropboxAllowSaveAccessKey: allowSave
+    })
   }
 
   render = () => {
@@ -16,23 +29,24 @@ class Settings extends React.Component {
       <div>
         <h4> Settings </h4>
           <Checkbox
-            checked={ this.state.dropboxOn }
-            onChange={ (e) => this.setState({dropboxOn: e.target.checked}) }
+            checked={ !!this.props.dropboxOn }
+            onChange={ (e) => this.props.setSettings({dropboxOn: e.target.checked}) }
             >Sync to Dropbox </Checkbox>
-          { this.state.dropboxOn && (
+          { this.props.dropboxOn && (
             <table style={ {width: '100%', margin: 'auto', background: 'none'} }>
               <tbody>
               <tr>
                 <td>
                 <FormControl
                   type="text"
-                  value={ this.state.dropboxAccessToken }
-                  onChange={ e => this.handleDropboxOnChange(e.target.value) }
+                  value={ this.state.dropboxAccessKey }
+                  onChange={ this.handleDropboxOnChange }
                   placeholder="Dropbox Acces Token"
                   />
                 </td>
                 <td style={ {textAlign: "center" } }>
-                  <Button>Save </Button>
+                  <Button onClick={ () => this.props.setSettings({dropboxAccessKey: this.state.dropboxAccessKey }) }
+                    disabled={ !this.state.dropboxAllowSaveAccessKey }>Save </Button>
                   </td>
               </tr>
               <tr>
@@ -54,12 +68,16 @@ class Settings extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     settings: state.settings,
-    dropboxAuthLink: state.dropbox.authUrl
+    dropboxAuthLink: state.dropbox.authUrl,
+    dropboxAccessKey: state.settings.dropboxAccessKey,
+    dropboxOn: state.settings.dropboxOn
   }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-
+    setSettings: (settings) => {
+      dispatch(setSettings(settings))
+    }
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Settings)
