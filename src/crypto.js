@@ -1,32 +1,30 @@
-import * as openpgp from 'openpgp';
+const openpgp = require('openpgp');
 // TODO: make this work: openpgp.initWorker({ path: 'openpgp.worker.js' })
-openpgp.config.aead_protect = true
 
 // Receives content as object, passcode as stringify
-// returns promise<Uint8Array>
+// returns promise<String>
 const encrypt = (content, passcode) => {
   let options = {
     data: JSON.stringify(content),
     passwords: [passcode],
-    armor: false
+    armor: true
   }
 
   return openpgp.encrypt(options).then( (ciphertext) => {
-    return ciphertext.message.packets.write()
+    return ciphertext.data
   })
 }
 
-// Receives ciphertext which shoudl be Uint8Array
+// Receives ciphertext which shoudl be armored
 // Returns Object
-export const decrypt = (ciphertext, passcode) => {
+const decrypt = (ciphertext, passcode) => {
   return openpgp.decrypt({
-    message: openpgp.message.read(ciphertext),
-    password: passcode,
-    format: 'binary'
-  }).then( plaintext => JSON.parse(new TextDecoder('utf-8').decode(plaintext.data)) )
+    message: openpgp.message.readArmored(ciphertext),
+    password: passcode
+  }).then( plaintext => JSON.parse(plaintext.data))
 }
 
-export const subscribeToStore = (store) => {
+exports.subscribeToStore = (store) => {
   let previousItems
   // Register as a listener to the store in order to encrypt state.items everytime they change
   store.subscribe(() => {
@@ -44,5 +42,5 @@ export const subscribeToStore = (store) => {
     previousItems = currentItems
   })
 }
-
-window.c = {encrypt, decrypt}
+exports.decrypt = decrypt
+exports.encrypt = encrypt

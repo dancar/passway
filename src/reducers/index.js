@@ -34,14 +34,12 @@ const items = (state = null, action) => {
 
 const encryptedContent = (state, action) => {
   if (action.type === 'NEW_ENCRYPTED_CONTENT') {
-    localStorage.encryptedContent = JSON.stringify(Array.from(action.encryptedItems))
+    localStorage.encryptedContent = action.encryptedItems
     return action.encryptedItems
   }
 
   if (state === undefined) {
-    return localStorage.encryptedContent ?
-      Uint8Array.from(JSON.parse(localStorage.encryptedContent))
-      : null
+    return localStorage.encryptedContent || null
   }
 
   return state
