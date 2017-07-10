@@ -5,9 +5,10 @@ PASSWAY
 ---
 - [X] Minimal UI
 - [X] Starting from an empty dataset, defining new passcode
-- [ ] redirect away from enter-passcode if there's no encrypted content
+- [ ] Fix passcode CSS
+- [X] redirect away from enter-passcode if there's no encrypted content
 - [ ] Changing existing passcode
-- [ ] redirect away from /list if there's no valid passcode
+- [X] redirect away from /list if there's no valid passcode
 - [X] redux
 - [X] react-router
 - [X] Fix Add new bug which doesn't clear last added
@@ -26,6 +27,8 @@ PASSWAY
 - [ ] Error handling
   - [ ] When sending / receiving dropbox
   - [ ] When encoding / decoding with passcode
+    - [ ] of dropbox
+    - [ ] of localStorage
 - [ ] Transaction UI Indication ("waiting...")
 - [ ] Tests
 - [X] Decrypt
@@ -37,9 +40,10 @@ PASSWAY
 - [ ] Handle Synchronization smartly
 - [ ] Code Style
   - [X] remove "password", use "item" ?
-  - [ ] consistent this in methods
+  - [X] consistent this in methods
 - [ ] Maybe nicer editing (inline, without popup)
 - [ ] Keypad when entering passcode?
 - [ ] multiple delete
 - [ ] switch to immutable.js?
 - [ ] crypto work in different thread using opgp-service or other tool?
+- [ ] maybe use redux-actions for some refactoring?
