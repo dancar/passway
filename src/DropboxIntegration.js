@@ -29,9 +29,15 @@ class DropboxIntegration extends React.Component {
     }
     this.props.setStatus(STATUS_CONNECTING)
     this.dbx.setAccessToken(this.props.settings.dropboxAccessKey)
+    // TODO: handle first sync when there's no file yet
     const link = await this.dbx.filesGetTemporaryLink({path: FILE_PATH})
-    this.rev = link.metadata.rev // TODO something with rev?
+    if (this.rev === link.rev) {
+      // This file has already been downloaded
+      return
+    }
+    this.rev = null
     const response = await fetch(link.link)
+    this.rev = link.metadata.rev
     const contentType = response.headers.get('content-type')
     let content
     if (contentType.match(/text/)) {
@@ -40,8 +46,12 @@ class DropboxIntegration extends React.Component {
       const contentArrayBuffer = await response.arrayBuffer()
       content = new Uint8Array(contentArrayBuffer)
     }
-    const newItems = await crypto.decrypt(content, this.props.passcode)
-    this.props.handleNewItems(newItems)
+    try {
+      const newItems = await crypto.decrypt(content, this.props.passcode)
+      this.props.handleNewItems(newItems)
+    } catch (e) {
+      console.error('Failed decrypting dropbox content')
+    }
   }
 
   render () {

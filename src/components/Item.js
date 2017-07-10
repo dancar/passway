@@ -1,40 +1,78 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router'
-import { Link }  from 'react-router-dom'
-import { Button } from 'react-bootstrap'
-import copy from 'copy-to-clipboard'
+import { Button, Panel, Glyphicon } from 'react-bootstrap'
 
-import ItemDetails from './ItemDetails.js'
+import EditItem from '../containers/EditItem'
+import ShowIf from './ShowIf'
 import './Item.css'
 
 export default class Item extends Component {
   constructor (props) {
     super(props)
-    this.itemUrl = `/list/${this.props.index}`
+    this.state = {
+      showEdit: false
+    }
+    this.handleExpandClick = this.handleExpandClick.bind(this)
+    this.handleEditClick = this.handleEditClick.bind(this)
+    // this.handleCopyClick = this.handleCopyClick.bind(this)
+    this.hideEdit = this.hideEdit.bind(this)
   }
 
-  handleCopyClick = (e) => {
-    copy(this.props.item.value)
+  handleEditClick () {
+    this.setState({
+      showEdit: true
+    })
+  }
+
+  handleExpandClick () {
+    this.props.onExpandClick(this.props.index)
+  }
+
+  hideEdit () {
+    this.setState({
+      showEdit: false
+    })
   }
 
   render (props) {
     return (
-      <Route path={this.itemUrl} children={({match, ...rest})=> {
-          const expanded=!!match
-          const to = expanded ? '/list' : this.itemUrl
-          return (
-            <div className="item" >
-              <Link to={to}>
-                <Button block >{this.props.item.name}</Button>
-              </Link>
-              <ItemDetails
-                item={this.props.item}
-                index={this.props.index}
-                expanded={ expanded }
-                />
-            </div>
-          )
-      }}/>
+      <div className='item' >
+        <EditItem
+          show={this.state.showEdit}
+          index={this.props.index}
+          hideMe={this.hideEdit}
+          item={this.props.item}
+        />
+
+        <Button block onClick={this.handleExpandClick} >{this.props.item.name}</Button>
+
+        <Panel
+          collapsible
+          expanded={this.props.expanded}
+          style={{ visibility: this.props.expanded ? 'visible' : 'hidden' }}
+        >
+          <div className='item-main'>
+            {this.props.item.value}
+          </div>
+
+          <Button
+            onClick={this.handleEditClick}
+            className='item-button'
+            bsSize='small'
+          >
+            <Glyphicon glyph='pencil' />
+          </Button>
+
+          <Button
+            className='item-button'
+            onClick={this.handleCopyClick}
+            bsSize='small'
+          >
+            <Glyphicon glyph='copy' />
+          </Button>
+
+        </Panel>
+
+      </div>
     )
   }
 }

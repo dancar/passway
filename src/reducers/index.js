@@ -8,7 +8,7 @@ const passcode = (state = null, action) => {
   return state
 }
 
-const items = (state = null, action) => {
+const items = (state = [], action) => {
   if (action.type === 'ADD_ITEM') {
     return [...state, action.item]
   }
@@ -26,7 +26,7 @@ const items = (state = null, action) => {
   }
 
   if (action.type === 'MERGE_ITEMS') {
-    // return Object.assign({}, state, action.items) // TODO timetsamp-based merge
+    // return Object.assign({}, state, action.items) // TODO timetsamp-based merge?
     return action.items
   }
 

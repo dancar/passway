@@ -1,29 +1,48 @@
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import { push } from 'react-router-redux'
-
 import EditWindow from '../components/EditWindow.js'
-import { addItem } from '../actions'
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    onSubmit: (itemData) => {
-      dispatch(addItem(itemData))
-      dispatch(push('/list'))
-    },
+import React from 'react'
 
-    onHide: () => {
-      dispatch(push('/list'))
-    },
+export default class AddItem extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      item: null
+    }
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleHide = this.handleHide.bind(this)
+  }
+  componentWillMount () {
+    this.reset()
+  }
 
-    item: {
-      name: '',
-      value: ''
-    },
+  reset () {
+    this.setState({
+      item: {
+        name: '',
+        value: ''
+      }
+    })
+  }
 
-    title: 'Add',
-    show: ownProps.match.isExact
+  handleSubmit (item) {
+    this.props.onSubmit(item)
+    this.reset()
+  }
+
+  handleHide () {
+    this.reset()
+    this.props.onHide()
+  }
+
+  render () {
+    return (
+      <EditWindow
+        show={this.props.show}
+        title='Add'
+        onSubmit={this.handleSubmit}
+        onHide={this.handleHide}
+        item={this.state.item}
+      />
+    )
   }
 }
-
-export default withRouter(connect(null, mapDispatchToProps)(EditWindow))

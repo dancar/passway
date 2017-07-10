@@ -1,20 +1,24 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Route } from 'react-router'
-import { Link, Redirect } from 'react-router-dom'
 import { FormControl, Button, Glyphicon } from 'react-bootstrap'
 
+import { addItem } from '../actions'
 import Item from '../components/Item'
-import EditItem from '../containers/EditItem.js'
-import AddItem from '../containers/AddItem.js'
+import ShowIf from '../components/ShowIf'
+import AddItem from '../containers/AddItem.js' // TODO: relocate
 import './ItemsList.css'
 
 class ItemsList extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      expandedItemIndex: null,
+      showAdd: false,
+      selected: null,
       filterText: ''
     }
+    this.filter = this.filter.bind(this)
+    this.handleExpandClick = this.handleExpandClick.bind(this)
   }
 
   filter (item) {
@@ -24,47 +28,52 @@ class ItemsList extends React.Component {
     return item.name.toLowerCase().indexOf(filterText) > -1
   }
 
-  renderItem (item, index) {
-    return (
+  handleAddItem (item) {
+    this.setState({showAdd: false})
+    this.props.addItem(item)
+  }
+
+  handleExpandClick (index) {
+    const expandedItemIndex = this.state.expandedItemIndex === index ? null : index
+    this.setState({expandedItemIndex})
+  }
+
+  render (props) {
+    const items = this.props.items.filter(this.filter).map((item, index) => (
       <Item
         onItemChange={(newState) => this.props.onItemChange(newState, index)}
         key={item.name + item.value}
         onDelete={() => this.props.onItemDelete(index)}
         index={index}
-        item={item} />
-    )
-  }
+        expanded={this.state.expandedItemIndex === index}
+        onExpandClick={this.handleExpandClick}
+        item={item}
+      />
+    ))
 
-  render (props) {
-    if (!this.props.items) {
-      return (
-        <Redirect to='/' />
-      )
-    }
     return (
       <div>
-        <Route path='/list/:index/edit' component={EditItem} />
-        <Route path='/list/add' component={AddItem} />
+        <ShowIf condition={this.props.items.length > 1} >
+          <FormControl
+            type='text'
+            className='filter'
+            value={this.state.filterText}
+            placeholder='Filter'
+            onChange={e => this.setState({filterText: e.target.value})}
+          />
+        </ShowIf>
 
-        { this.props.items.length > 1 &&
-          (
-            <FormControl
-              type='text'
-              className='filter'
-              value={this.state.filterText}
-              placeholder='Filter'
-              onChange={e => this.setState({filterText: e.target.value})}
-              />
-          )
-        }
+        <AddItem
+          show={this.state.showAdd}
+          onHide={() => this.setState({showAdd: false})}
+          onSubmit={this.handleAddItem.bind(this)}
+        />
 
-        <Link to='/list/add'>
-          <Button block className='items-list-add' >
-            <Glyphicon glyph='plus' />
-          </Button>
-        </Link>
+        <Button block className='items-list-add' onClick={() => this.setState({showAdd: true})}>
+          <Glyphicon glyph='plus' />
+        </Button>
 
-        { this.props.items.filter(this.filter.bind(this)).map(this.renderItem.bind(this)) }
+        { items }
       </div>
     )
   }
@@ -72,8 +81,15 @@ class ItemsList extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    items: (state.items && Object.keys(state.items).map(key => state.items[key])) || []
+    items: state.items
   }
 }
 
-export default connect(mapStateToProps)(ItemsList)
+const mapDispatchToProps = function (dispatch, ownProps) {
+  return {
+    addItem: function (item) {
+      dispatch(addItem(item))
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ItemsList)
