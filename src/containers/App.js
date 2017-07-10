@@ -11,21 +11,16 @@ import Settings from './Settings.js'
 import DropboxIntegration from '../DropboxIntegration.js' // TODO relocate file
 
 class App extends Component {
-  renderRedirection () {
+  render () {
     const hasPasscode = this.props.passcode
     const hasEncryptedContent = this.props.hasEncryptedContent
 
-    let to = '/list'
     if (!hasPasscode) {
-      to = hasEncryptedContent ? '/enter-passcode' : '/create-passcode'
+      return hasEncryptedContent
+        ? <EnterPasscode />
+        : <CreatePasscode />
     }
 
-    return (
-      <Redirect to={to} />
-    )
-  }
-
-  render () {
     return (
       <div>
         {
@@ -34,12 +29,10 @@ class App extends Component {
         <Navbar />
         <div className='page-container'>
           <Switch>
-            <Route path='/settings' component={Settings} />
-            <Route path='/list' component={ItemsList} />
-            <Route exact path='/create-passcode' component={CreatePasscode} />
-            <Route exact path='/enter-passcode' component={EnterPasscode} />
+            <Route path='/settings' component={Settings} exact />
+            <Route path='/' component={ItemsList} exact />
             <Route path='*' >
-              { this.renderRedirection() }
+              <Redirect to='/' push />
             </Route>
           </Switch>
         </div>
@@ -51,7 +44,6 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     passcode: state.passcode,
-    hasItems: !!state.items,
     hasEncryptedContent: !!state.encryptedContent
   }
 }
