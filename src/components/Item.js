@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Button, Panel, Glyphicon } from 'react-bootstrap'
+import copy from 'copy-to-clipboard'
 
 import EditItem from '../containers/EditItem'
-import ShowIf from './ShowIf'
 import './Item.css'
 
 export default class Item extends Component {
@@ -13,8 +13,12 @@ export default class Item extends Component {
     }
     this.handleExpandClick = this.handleExpandClick.bind(this)
     this.handleEditClick = this.handleEditClick.bind(this)
-    // this.handleCopyClick = this.handleCopyClick.bind(this)
+    this.handleCopyClick = this.handleCopyClick.bind(this)
     this.hideEdit = this.hideEdit.bind(this)
+  }
+
+  handleCopyClick () {
+    copy(this.props.item.value)
   }
 
   handleEditClick () {

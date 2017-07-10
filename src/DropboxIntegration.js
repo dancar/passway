@@ -48,6 +48,7 @@ class DropboxIntegration extends React.Component {
     }
     try {
       const newItems = await crypto.decrypt(content, this.props.passcode)
+    // TODO make sure items are init before adding
       this.props.handleNewItems(newItems)
     } catch (e) {
       console.error('Failed decrypting dropbox content')
@@ -112,7 +113,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     setAuthUrl: authUrl => dispatch(dropboxSetAuthUrl(authUrl)),
     setStatus: status => dispatch({type: 'DROPBOX_STATUS', status}), // TODO: action?
-    handleNewItems: (newItems, timestamp) => dispatch(mergeItems(newItems, timestamp))
+    handleNewItems: (newItems) => dispatch(mergeItems(newItems))
   }
 }
 

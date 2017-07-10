@@ -31,21 +31,26 @@ export async function decrypt (ciphertext, password) {
 }
 
 export function subscribeToStore (store) {
-  let previousItems
-  // Register as a listener to the store in order to encrypt state.items everytime they change
+  let previousItems, previousPasscode
+
+  // Register as a listener to he store
+  // so as to encrypt the items when they change
   store.subscribe(() => {
-    const currentState = store.getState()
-    const currentItems = currentState.items
-    if (!currentItems) {
+    const state = store.getState()
+    if (!state.items || !state.passcode) {
       return
     }
 
-    if (currentItems !== previousItems) {
-      encrypt(currentItems, currentState.passcode)
-      .then((encryptedItems) => {
-        store.dispatch({type: 'NEW_ENCRYPTED_CONTENT', encryptedItems})
-      })
+    const changeDetected = state.items !== previousItems ||
+         state.passcode !== previousPasscode
+
+    if (changeDetected) {
+      encrypt(state.items, state.passcode)
+        .then((encryptedItems) => {
+          store.dispatch({type: 'NEW_ENCRYPTED_CONTENT', encryptedItems}) // TODO action?
+        })
+      previousItems = state.items
+      previousPasscode = state.passcode
     }
-    previousItems = currentItems
   })
 }

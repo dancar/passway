@@ -8,7 +8,11 @@ const passcode = (state = null, action) => {
   return state
 }
 
-const items = (state = [], action) => {
+const items = (state = null, action) => {
+  if (action.type === 'INIT_ITEMS') {
+    return action.items
+  }
+
   if (action.type === 'ADD_ITEM') {
     return [...state, action.item]
   }
@@ -30,17 +34,11 @@ const items = (state = [], action) => {
     return action.items
   }
 
-  if (action.type === 'SET_PASSCODE' && state === null) {
-    // if a new passcode has been set, init empty list
-    // TODO: if there is encrypted content, try decrypting it first
-    return []
-  }
   return state
 }
 
 const encryptedContent = (state, action) => {
   if (action.type === 'NEW_ENCRYPTED_CONTENT') {
-    localStorage.encryptedContentTimestamp = new Date().getTime()
     localStorage.encryptedContent = action.encryptedItems
     return action.encryptedItems
   }

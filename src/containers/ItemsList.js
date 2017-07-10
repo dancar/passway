@@ -2,10 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { FormControl, Button, Glyphicon } from 'react-bootstrap'
 
+// import DropboxIntegration from '../DropboxIntegration' // TODO relocate file
 import { addItem } from '../actions'
 import Item from '../components/Item'
 import ShowIf from '../components/ShowIf'
-import AddItem from '../containers/AddItem.js' // TODO: relocate
+import AddItem from '../containers/AddItem' // TODO: relocate
 import './ItemsList.css'
 
 class ItemsList extends React.Component {
@@ -53,6 +54,9 @@ class ItemsList extends React.Component {
 
     return (
       <div>
+        {
+            // <DropboxIntegration />
+            }
         <ShowIf condition={this.props.items.length > 1} >
           <FormControl
             type='text'
@@ -81,7 +85,7 @@ class ItemsList extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    items: state.items
+    items: state.items || []
   }
 }
 

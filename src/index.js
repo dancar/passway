@@ -5,18 +5,19 @@ import createHistory from 'history/createBrowserHistory'
 import { Provider } from 'react-redux'
 import { ConnectedRouter as Router, routerReducer, routerMiddleware } from 'react-router-redux'
 import registerServiceWorker from './registerServiceWorker'
+import thunk from 'redux-thunk'
+import logger from 'redux-logger'
 
+import * as crypto from './crypto'
 import App from './containers/App'
 import reducers from './reducers'
-import * as crypto from './crypto.js'
 import './index.css'
 
 const history = createHistory()
-const middleware = routerMiddleware(history)
 const store = createStore(combineReducers({
   ...reducers,
   router: routerReducer
-}), applyMiddleware(middleware))
+}), applyMiddleware(thunk, routerMiddleware(history), logger))
 crypto.subscribeToStore(store)
 
 ReactDOM.render((

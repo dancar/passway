@@ -1,7 +1,25 @@
+/* globals localStorage */
+import { decrypt } from '../crypto'
+
 export const setPasscode = (newPasscode) => {
   return {
     type: 'SET_PASSCODE',
     newPasscode
+  }
+}
+
+export const setPasscodeAndDecrypt = (newPasscode) => (dispatch) =>
+  decrypt(localStorage.encryptedContent, newPasscode)
+  .then(function (newItems) {
+    dispatch(setPasscode(newPasscode))
+    dispatch(mergeItems(newItems))
+  })
+// TODO: error handling
+
+export const initItems = (items) => {
+  return {
+    items,
+    type: 'INIT_ITEMS'
   }
 }
 
@@ -12,7 +30,7 @@ export const addItem = (item) => {
   }
 }
 
-export const mergeItems = (items, timestamp) => {
+export const mergeItems = (items) => {
   return {
     type: 'MERGE_ITEMS',
     items

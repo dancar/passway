@@ -8,7 +8,6 @@ import CreatePasscode from './CreatePasscode.js'
 import EnterPasscode from './EnterPasscode.js'
 import Navbar from '../components/Navbar.js'
 import Settings from './Settings.js'
-import DropboxIntegration from '../DropboxIntegration.js' // TODO relocate file
 
 class App extends Component {
   render () {
@@ -23,9 +22,6 @@ class App extends Component {
 
     return (
       <div>
-        {
-          <DropboxIntegration />
-        }
         <Navbar />
         <div className='page-container'>
           <Switch>
