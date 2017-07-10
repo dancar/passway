@@ -21,21 +21,25 @@ PASSWAY
 - [X] Deleting
 - [X] Retrieve data from Dropbox
 - [ ] Include the Bootstrap css in the folder, including glyphs
-- [ ] Save back to Dropbox
+- [ ] Figure out when do Dropbox request updates (aside from init & settings change?)
+- [X] Save back to Dropbox
 - [ ] Error handling
   - [ ] When sending / receiving dropbox
   - [ ] When encoding / decoding with passcode
 - [ ] Transaction UI Indication ("waiting...")
 - [ ] Tests
 - [X] Decrypt
-- [ ] Encrypt
+- [X] Encrypt
 - [X] Devide to different passwords
+- [ ] Handle complex synchronization scenarios?
 - [ ] Mobile - Progressive App
 - [X] Persistence of authkey, maybe data as well
-- [ ] Handle Synchronization smurtly
+- [ ] Handle Synchronization smartly
 - [ ] Code Style
   - [X] remove "password", use "item" ?
   - [ ] consistent this in methods
 - [ ] Maybe nicer editing (inline, without popup)
 - [ ] Keypad when entering passcode?
 - [ ] multiple delete
+- [ ] switch to immutable.js?
+- [ ] crypto work in different thread using opgp-service or other tool?

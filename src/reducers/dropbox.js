@@ -1,3 +1,5 @@
+/* globals localStorage */
+
 export default (state, action) => {
   if (action.type === 'DROPBOX_SET_AUTH_URL') {
     return Object.assign({}, state, {authUrl: action.url})
@@ -27,8 +29,8 @@ export default (state, action) => {
   }
 
   if (state === undefined) {
-    return localStorage.dropboxSettings ?
-      JSON.parse(localStorage.dropboxSettings)
+    return localStorage.dropboxSettings
+      ? JSON.parse(localStorage.dropboxSettings)
       : { authUrl: this.authUrl }
   }
 

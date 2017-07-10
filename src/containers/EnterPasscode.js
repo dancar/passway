@@ -4,7 +4,7 @@ import { Button, Form, FormControl, ControlLabel } from 'react-bootstrap'
 import { push } from 'react-router-redux'
 
 import * as crypto from '../crypto.js'
-import {setPasscode, setItems} from '../actions'
+import {setPasscode, mergeItems} from '../actions'
 
 class EnterPasscode extends Component {
   constructor (props) {
@@ -41,16 +41,18 @@ class EnterPasscode extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    encryptedContent: state.encryptedContent
+    encryptedContent: state.encryptedContent,
+    encryptedContentTimestamp: state.encryptedContentTimestamp
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onSubmit: (newPasscode, encryptedContent) => {
+      // TOOD SHouldn't be here?
       crypto.decrypt(encryptedContent, newPasscode)
         .then( (decryptedContent) => {
-          dispatch(setItems(decryptedContent))
+          dispatch(mergeItems(decryptedContent))
           dispatch(push('/'))
         })
       dispatch(setPasscode(newPasscode))

@@ -13,58 +13,58 @@ class ItemsList extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      filterText: ""
+      filterText: ''
     }
   }
 
-  filter = (item) => {
+  filter (item) {
     const filterText = this.state.filterText.trim().toLowerCase()
-    if (filterText.length === 0)
-      return true
+    if (filterText.length === 0) { return true }
 
     return item.name.toLowerCase().indexOf(filterText) > -1
   }
 
-  renderItem = (item, index) => {
+  renderItem (item, index) {
     return (
       <Item
         onItemChange={(newState) => this.props.onItemChange(newState, index)}
-        key={ item.name + item.value }
+        key={item.name + item.value}
         onDelete={() => this.props.onItemDelete(index)}
-        index={ index }
-        item={item}/>
+        index={index}
+        item={item} />
     )
   }
 
   render (props) {
-    if (!this.props.items)
+    if (!this.props.items) {
       return (
-        <Redirect to="/" />
+        <Redirect to='/' />
       )
+    }
     return (
       <div>
-        <Route path="/list/:index/edit" component={ EditItem } />
-        <Route path="/list/add" component={ AddItem } />
+        <Route path='/list/:index/edit' component={EditItem} />
+        <Route path='/list/add' component={AddItem} />
 
-        { this.props.items.length > 1  &&
+        { this.props.items.length > 1 &&
           (
             <FormControl
-              type="text"
-              className="filter"
+              type='text'
+              className='filter'
               value={this.state.filterText}
-              placeholder="Filter"
-              onChange={ e => this.setState({filterText: e.target.value}) }
+              placeholder='Filter'
+              onChange={e => this.setState({filterText: e.target.value})}
               />
           )
         }
 
-        <Link to="/list/add">
-          <Button block className="items-list-add" >
-            <Glyphicon glyph="plus" />
+        <Link to='/list/add'>
+          <Button block className='items-list-add' >
+            <Glyphicon glyph='plus' />
           </Button>
         </Link>
 
-        { this.props.items.filter(this.filter).map(this.renderItem) }
+        { this.props.items.filter(this.filter.bind(this)).map(this.renderItem.bind(this)) }
       </div>
     )
   }
@@ -72,7 +72,7 @@ class ItemsList extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    items: state.items
+    items: (state.items && Object.keys(state.items).map(key => state.items[key])) || []
   }
 }
 

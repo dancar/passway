@@ -11,7 +11,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   const itemUrl = `/list/${index}`
 
   return {
-    onSubmit: (itemData ) => {
+    onSubmit: (itemData) => {
       dispatch(changeItem(itemData, index))
       dispatch(push(itemUrl))
     },

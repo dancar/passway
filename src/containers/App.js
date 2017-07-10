@@ -1,43 +1,44 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import './App.css';
+import { withRouter, Route, Switch, Redirect } from 'react-router-dom'
+
+import './App.css'
 import ItemsList from '../containers/ItemsList.js'
 import CreatePasscode from './CreatePasscode.js'
 import EnterPasscode from './EnterPasscode.js'
 import Navbar from '../components/Navbar.js'
 import Settings from './Settings.js'
-import {Route, Switch, Redirect} from 'react-router-dom'
-import DropboxIntegration from '../DropboxIntegration.js' //TODO relocate file
+import DropboxIntegration from '../DropboxIntegration.js' // TODO relocate file
 
 class App extends Component {
-
-  renderRedirection = () => {
-    const hasPasscode = this.props.passcode,
-          hasItems = this.props.hasItems,
-          hasEncryptedContent = this.props.hasEncryptedContent
+  renderRedirection () {
+    const hasPasscode = this.props.passcode
+    const hasEncryptedContent = this.props.hasEncryptedContent
 
     let to = '/list'
-    if (!hasPasscode)
+    if (!hasPasscode) {
       to = hasEncryptedContent ? '/enter-passcode' : '/create-passcode'
+    }
 
     return (
       <Redirect to={to} />
     )
   }
 
-  render() {
+  render () {
     return (
       <div>
-        <DropboxIntegration />
+        {
+          <DropboxIntegration />
+        }
         <Navbar />
-        <div  className="page-container">
+        <div className='page-container'>
           <Switch>
-            <Route path="/settings" component={Settings} />
-            <Route path="/list" component={ItemsList} />
-            <Route exact path="/create-passcode" component={CreatePasscode} />
-            <Route exact path="/enter-passcode" component={EnterPasscode} />
-            <Route path="*" >
+            <Route path='/settings' component={Settings} />
+            <Route path='/list' component={ItemsList} />
+            <Route exact path='/create-passcode' component={CreatePasscode} />
+            <Route exact path='/enter-passcode' component={EnterPasscode} />
+            <Route path='*' >
               { this.renderRedirection() }
             </Route>
           </Switch>
@@ -45,7 +46,6 @@ class App extends Component {
       </div>
     )
   }
-
 }
 
 const mapStateToProps = (state) => {

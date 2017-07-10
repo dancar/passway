@@ -12,9 +12,9 @@ export const addItem = (item) => {
   }
 }
 
-export const setItems = (items) => {
+export const mergeItems = (items, timestamp) => {
   return {
-    type: 'SET_ITEMS',
+    type: 'MERGE_ITEMS',
     items
   }
 }

@@ -7,7 +7,7 @@ import { addItem } from '../actions'
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onSubmit: (itemData ) => {
+    onSubmit: (itemData) => {
       dispatch(addItem(itemData))
       dispatch(push('/list'))
     },
@@ -17,8 +17,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
 
     item: {
-      name: "",
-      value: ""
+      name: '',
+      value: ''
     },
 
     title: 'Add',

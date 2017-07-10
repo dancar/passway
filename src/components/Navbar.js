@@ -7,13 +7,13 @@ import './Navbar.css'
 export default class Navbar extends React.Component {
   render () {
     return (
-      <div className="passway-navbar">
-        <div className="passway-brand">
-          <Link to={ '/' }> Passway </Link>
+      <div className='passway-navbar'>
+        <div className='passway-brand'>
+          <Link to={'/'}> Passway </Link>
         </div>
-        <div className="passway-navbar-right">
+        <div className='passway-navbar-right'>
           <DropboxStatus />
-          <Link to={ '/settings' }>Settings </Link>
+          <Link to={'/settings'}>Settings </Link>
         </div>
       </div>
     )
