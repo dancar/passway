@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import { Button, Form, FormControl } from 'react-bootstrap'
 
-import {setPasscodeAndDecrypt} from '../actions'
+import { enterPasscode } from '../actions'
 
 class EnterPasscode extends Component {
   constructor (props) {
@@ -47,7 +47,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onSubmit: (newPasscode, encryptedContent) => {
-      dispatch(setPasscodeAndDecrypt(newPasscode))
+      dispatch(enterPasscode(newPasscode))
     }
   }
 }

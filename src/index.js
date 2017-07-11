@@ -6,18 +6,27 @@ import { Provider } from 'react-redux'
 import { ConnectedRouter as Router, routerReducer, routerMiddleware } from 'react-router-redux'
 import registerServiceWorker from './registerServiceWorker'
 import thunk from 'redux-thunk'
-import logger from 'redux-logger'
+import { createLogger } from 'redux-logger'
 
 import * as crypto from './crypto'
+import dropboxMiddleware from './middleware/dropbox'
 import App from './containers/App'
 import reducers from './reducers'
+import { initMiddleware } from './actions'
 import './index.css'
+
+const logger = createLogger({
+  collapsed: true,
+  level: 'debug'
+})
 
 const history = createHistory()
 const store = createStore(combineReducers({
   ...reducers,
   router: routerReducer
-}), applyMiddleware(thunk, routerMiddleware(history), logger))
+}), applyMiddleware(dropboxMiddleware, thunk, routerMiddleware(history), logger))
+
+store.dispatch(initMiddleware())
 crypto.subscribeToStore(store)
 
 ReactDOM.render((

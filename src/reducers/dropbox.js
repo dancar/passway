@@ -6,17 +6,12 @@ export default (state, action) => {
   }
 
   if (action.type === 'DROPBOX_SET_SETTINGS') {
-    const newSettings = Object.assign({}, state, action.settings)
+    const newSettings = Object.assign({}, state.settings, {[action.name]: action.value})
     localStorage.dropboxSettings = JSON.stringify(newSettings)
-
-    if (newSettings.dropboxOn && newSettings.dropboxAccessKey) {
-
-    }
-
-    return newSettings
+    return Object.assign({}, state, {settings: newSettings})
   }
 
-  if (action.type === 'NEW_ENCRYPTED_CONTENT') {
+  if (action.type === 'SKIP_NEW_ENCRYPTED_CONTENT') {
     return Object.assign({}, state, {
       needsUpload: true
     })
@@ -29,9 +24,17 @@ export default (state, action) => {
   }
 
   if (state === undefined) {
-    return localStorage.dropboxSettings
-      ? JSON.parse(localStorage.dropboxSettings)
-      : { authUrl: this.authUrl }
+    const initialState = {
+      settings: {
+        accesKey: null,
+        dropboxOn: null
+      },
+      authUrl: null
+    }
+    if (localStorage.dropboxSettings) {
+      initialState.settings = JSON.parse(localStorage.dropboxSettings)
+    }
+    return initialState
   }
 
   return state

@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import { Button, Form, FormControl, ControlLabel } from 'react-bootstrap'
 
-import {setPasscode, initItems} from '../actions'
+import { createPasscode } from '../actions'
 import './CreatePasscode.css'
 
 class CreatePasscode extends Component {
@@ -73,8 +73,7 @@ class CreatePasscode extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     onSubmit: (newPasscode) => {
-      dispatch(setPasscode(newPasscode))
-      dispatch(initItems([]))
+      dispatch(createPasscode(newPasscode))
     }
   }
 }

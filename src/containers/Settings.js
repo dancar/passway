@@ -29,7 +29,7 @@ class Settings extends React.Component {
         <h4> Settings </h4>
         <Checkbox
           checked={!!this.props.dropboxOn}
-          onChange={(e) => this.props.dropboxSetSettings({dropboxOn: e.target.checked})}
+          onChange={(e) => this.props.dropboxSetSettings('dropboxOn', e.target.checked)}
           >Sync to Dropbox </Checkbox>
         { this.props.dropboxOn && (
           <table style={{width: '100%', margin: 'auto', background: 'none'}}>
@@ -44,7 +44,7 @@ class Settings extends React.Component {
                     />
                 </td>
                 <td style={{ textAlign: 'center' }}>
-                  <Button onClick={() => this.props.dropboxSetSettings({ dropboxAccessKey: this.state.dropboxAccessKey })}
+                  <Button onClick={() => this.props.dropboxSetSettings('accessKey',this.state.dropboxAccessKey)}
                     disabled={!this.state.dropboxAllowSaveAccessKey}>Save </Button>
                 </td>
               </tr>
@@ -65,14 +65,14 @@ class Settings extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     dropboxAuthLink: state.dropbox.authUrl,
-    dropboxAccessKey: state.dropbox.dropboxAccessKey,
-    dropboxOn: state.dropbox.dropboxOn
+    dropboxAccessKey: state.dropbox.settings.accessKey,
+    dropboxOn: state.dropbox.settings.dropboxOn
   }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    dropboxSetSettings: (settings) => {
-      dispatch(dropboxSetSettings(settings))
+    dropboxSetSettings: (name, value) => {
+      dispatch(dropboxSetSettings(name, value))
     }
   }
 }

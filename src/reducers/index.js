@@ -38,7 +38,7 @@ const items = (state = null, action) => {
 }
 
 const encryptedContent = (state, action) => {
-  if (action.type === 'NEW_ENCRYPTED_CONTENT') {
+  if (action.type === 'SAVE_ENCRYPTED_CONTENT') {
     localStorage.encryptedContent = action.encryptedItems
     return action.encryptedItems
   }

@@ -5,6 +5,10 @@ PASSWAY
 ---
 - [X] Minimal UI
 - [X] Starting from an empty dataset, defining new passcode
+- [ ] Crypto as middleware?
+- [ ] Dropbox as redux-saga saga?
+- [ ] Dropbox status indication
+- [ ] Bad Passcode indication
 - [ ] Fix passcode CSS
 - [X] redirect away from enter-passcode if there's no encrypted content
 - [ ] Changing existing passcode

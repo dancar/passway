@@ -1,3 +1,4 @@
+import { saveEncryptedItems } from './actions'
 const openpgp = require('openpgp')
 // TODO: make this work:
 // openpgp.initWorker({ path: 'openpgp.worker.js' })
@@ -47,7 +48,7 @@ export function subscribeToStore (store) {
     if (changeDetected) {
       encrypt(state.items, state.passcode)
         .then((encryptedItems) => {
-          store.dispatch({type: 'NEW_ENCRYPTED_CONTENT', encryptedItems}) // TODO action?
+          store.dispatch(saveEncryptedItems(encryptedItems)) // TODO action?
         })
       previousItems = state.items
       previousPasscode = state.passcode
