@@ -47,7 +47,7 @@ export default class Item extends Component {
           item={this.props.item}
         />
 
-        <Button block onClick={this.handleExpandClick} >{this.props.item.name}</Button>
+        <Button className='item-button' block onClick={this.handleExpandClick} >{this.props.item.name}</Button>
 
         <Panel
           collapsible

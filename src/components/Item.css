@@ -4,8 +4,14 @@
 }
 
 .item-button {
-  margin-left: 5px;
+  /* margin-left: 5px; */
+
 }
+
+.item-button:focus {
+  outline: 0px
+}
+
 
 .item {
   display: block;

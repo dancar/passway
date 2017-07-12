@@ -61,8 +61,8 @@ class ItemsList extends React.Component {
     return (
       <div>
         <InputGroupWithDisplayCondition
-          style={{marginBottom: 20}}
           condition={this.props.items.length > 1}
+          style={{marginBottom: 20}}
         >
           <FormControl
             type='text'
