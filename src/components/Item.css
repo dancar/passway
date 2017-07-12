@@ -1,5 +1,6 @@
 .item-main {
   flex: 1;
+  white-space: pre;
 }
 
 .item-button {
