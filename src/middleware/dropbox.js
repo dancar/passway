@@ -62,6 +62,7 @@ export default store => {
       mode: lastRev
         ? { '.tag': 'update', update: lastRev }
         : {'.tag': 'add'},
+      mute: true,
       contents: encryptedContent
     })
   }
