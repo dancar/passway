@@ -1,13 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { FormControl, Button, Glyphicon } from 'react-bootstrap'
+import { FormControl, InputGroup, Button, Glyphicon } from 'react-bootstrap'
 
 // import DropboxIntegration from '../DropboxIntegration' // TODO relocate file
 import { addItem } from '../actions'
 import Item from '../components/Item'
-import ShowIf from '../components/ShowIf'
+import withDisplayCondition from '../components/withDisplayCondition'
 import AddItem from '../containers/AddItem' // TODO: relocate
 import './ItemsList.css'
+
+const InputGroupWithDisplayCondition = withDisplayCondition(InputGroup)
 
 class ItemsList extends React.Component {
   constructor (props) {
@@ -54,19 +56,24 @@ class ItemsList extends React.Component {
 
     return (
       <div>
-        {
-            // <DropboxIntegration />
-            }
-        <ShowIf condition={this.props.items.length > 1} >
+        <InputGroupWithDisplayCondition
+          style={{marginBottom: 20}}
+          condition={this.props.items.length > 1}
+        >
           <FormControl
             type='text'
-            className='filter'
+            className='filter inline'
             value={this.state.filterText}
             placeholder='Filter'
             onChange={e => this.setState({filterText: e.target.value})}
             autoFocus
           />
-        </ShowIf>
+          <InputGroup.Button>
+            <Button onClick={() => this.setState({filterText: ''})}>
+              Reset
+            </Button>
+          </InputGroup.Button>
+        </InputGroupWithDisplayCondition>
 
         <AddItem
           show={this.state.showAdd}
@@ -74,7 +81,12 @@ class ItemsList extends React.Component {
           onSubmit={this.handleAddItem.bind(this)}
         />
 
-        <Button block className='items-list-add' onClick={() => this.setState({showAdd: true})}>
+        <Button
+          block
+          className='items-list-add'
+          style={{marginBottom: 20}}
+          onClick={() => this.setState({showAdd: true})}
+        >
           <Glyphicon glyph='plus' />
         </Button>
 

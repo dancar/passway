@@ -5,7 +5,8 @@ PASSWAY
 ---
 - [X] Minimal UI
 - [X] Starting from an empty dataset, defining new passcode
-- [ ] Clear button for filter
+- [ ] Fuzzy Filter
+- [X] Clear button for filter
 - [ ] Clear local cache
 - [ ] Change passcode
 - [ ] Disable first dropbox upload because it is useless

@@ -41,7 +41,8 @@ export default class EditWindow extends Component {
     return (
       <Modal
         onHide={this.handleHide}
-        show={this.props.show} >
+        show={this.props.show}
+       >
         <Modal.Header closeButton>
           <Modal.Title>{this.props.title}</Modal.Title>
         </Modal.Header>
