@@ -1,61 +1,10 @@
 PASSWAY
 =======
 
-2Do
----
-- [X] Minimal UI
-- [ ] Fix merge
-- [ ] Smarter merge
-- [ ] Factor out encryption stuff from dropbox
-- [X] Starting from an empty dataset, defining new passcode
-- [ ] Fuzzy Filter
-- [X] Clear button for filter
-- [ ] Clear local cache
-- [ ] Change passcode
-- [ ] Disable first dropbox upload because it is useless
-- [ ] Crypto as middleware?
-- [ ] Dropbox as redux-saga saga?
-- [ ] Dropbox status indication
-- [ ] Bad Passcode indication
-- [ ] Fix passcode CSS
-- [X] redirect away from enter-passcode if there's no encrypted content
-- [ ] Changing existing passcode
-- [X] redirect away from /list if there's no valid passcode
-- [X] redux
-- [X] react-router
-- [X] Fix Add new bug which doesn't clear last added
-- [X] Fix bug when changing an item, it collapses
-- [ ] Form validation: no empty name
-- [ ] Experiment: maybe color theme with lots of colors for items
-- [ ] Indication of successful copy / remove / add/ change, etc
-- [ ] fix css vertical centering somehow
-- [X] Filtering
-- [X] Editing + Saving
-- [X] Deleting
-- [X] Retrieve data from Dropbox
-- [ ] Include the Bootstrap css in the folder, including glyphs
-- [ ] Figure out when do Dropbox request updates (aside from init & settings change?)
-- [X] Save back to Dropbox
-- [ ] Error handling
-  - [ ] When sending / receiving dropbox
-  - [ ] When encoding / decoding with passcode
-    - [ ] of dropbox
-    - [ ] of localStorage
-- [ ] Transaction UI Indication ("waiting...")
-- [ ] Tests
-- [X] Decrypt
-- [X] Encrypt
-- [X] Devide to different passwords
-- [ ] Handle complex synchronization scenarios?
-- [ ] Mobile - Progressive App
-- [X] Persistence of authkey, maybe data as well
-- [ ] Handle Synchronization smartly
-- [ ] Code Style
-  - [X] remove "password", use "item" ?
-  - [X] consistent this in methods
-- [ ] Maybe nicer editing (inline, without popup)
-- [ ] Keypad when entering passcode?
-- [ ] multiple delete
-- [ ] switch to immutable.js?
-- [ ] crypto work in different thread using opgp-service or other tool?
-- [ ] maybe use redux-actions for some refactoring?
+Passway is a small webapp that manages a simple list of name-value pairs.
+
+The list is encrypted and stored in localStorage.
+
+Encryption is symmetric using a passcode provided by the user.
+
+Passway supports syncing the list to Dropbox as well.
