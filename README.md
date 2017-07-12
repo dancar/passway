@@ -4,6 +4,9 @@ PASSWAY
 2Do
 ---
 - [X] Minimal UI
+- [ ] Fix merge
+- [ ] Smarter merge
+- [ ] Factor out encryption stuff from dropbox
 - [X] Starting from an empty dataset, defining new passcode
 - [ ] Fuzzy Filter
 - [X] Clear button for filter

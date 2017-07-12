@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { FormControl, InputGroup, Button, Glyphicon } from 'react-bootstrap'
 
-// import DropboxIntegration from '../DropboxIntegration' // TODO relocate file
 import { addItem } from '../actions'
 import Item from '../components/Item'
 import withDisplayCondition from '../components/withDisplayCondition'

@@ -34,6 +34,7 @@ export default store => {
     lastRev = null
     const response = await fetch(link.link)
     lastRev = link.metadata.rev
+    console.log(`Dropbox: Successfully downloaded ${lastRev}`)
     const contentType = response.headers.get('content-type')
 
     let encryptedContent
@@ -49,7 +50,7 @@ export default store => {
       content = await crypto.decrypt(encryptedContent, passcode)
     } catch (e) {
       console.error(e)
-      console.error('Failed decrypting dropbox content')
+      console.error('Dropbox: Failed decrypting Dropbox content')
     }
     return content
   }
@@ -81,14 +82,15 @@ export default store => {
         accessKey
       })
         .then((response) => {
-          console.log('UPLOAD SUCCESS')
+          lastRev = response.rev
+          console.log(`Dropbox: Uploaded rev ${lastRev}`)
         })
         .catch(error => {
           if (error.status === 409) {
-            console.log('Update rejected for rev ' + this.rev)
+            console.log('Dropbox: Update rejected ' + lastRev)
             store.dispatch(dropboxFetch())
           } else {
-            console.error('Dropbox upload error', error)
+            console.error('Dropbox: Upload error', error)
           }
         })
     }
