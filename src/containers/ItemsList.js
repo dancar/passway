@@ -41,17 +41,22 @@ class ItemsList extends React.Component {
   }
 
   render (props) {
-    const items = this.props.items.filter(this.filter).map((item, index) => (
-      <Item
-        onItemChange={(newState) => this.props.onItemChange(newState, index)}
-        key={item.name + item.value}
-        onDelete={() => this.props.onItemDelete(index)}
-        index={index}
-        expanded={this.state.expandedItemIndex === index}
-        onExpandClick={this.handleExpandClick}
-        item={item}
-      />
-    ))
+    const items = this.props.items.map((item, index) => {
+      if (!this.filter(item)) {
+        return false
+      }
+      return (
+        <Item
+          onItemChange={(newState) => this.props.onItemChange(newState, index)}
+          key={item.name + item.value}
+          onDelete={() => this.props.onItemDelete(index)}
+          index={index}
+          expanded={this.state.expandedItemIndex === index}
+          onExpandClick={this.handleExpandClick}
+          item={item}
+          />
+      )
+    }).filter(x => x)
 
     return (
       <div>
