@@ -40,7 +40,7 @@ export default class AddItem extends React.Component {
         show={this.props.show}
         title='Add'
         onSubmit={this.handleSubmit}
-        onHide={this.handleHide}
+        hideMe={this.handleHide}
         item={this.state.item}
       />
     )
