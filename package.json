@@ -22,6 +22,8 @@
     "react-scripts": "1.0.6"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "rsync -r build/* passway.ma-kaf.com:~/passway/",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
