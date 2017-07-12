@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
-import { Button, Form, FormControl } from 'react-bootstrap'
+import { FormControl, Button, Form } from 'react-bootstrap'
 
 import { enterPasscode } from '../actions'
 
@@ -24,6 +24,7 @@ class EnterPasscode extends Component {
         Welcome to Passway. Please enter your passcode:
         <Form onSubmit={this.handleSubmit}>
           <FormControl
+            autoFocus
             id='passcode' type='password'
             value={this.state.passcode}
             onChange={(e) => this.setState({passcode: e.target.value})}

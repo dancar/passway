@@ -64,6 +64,7 @@ class ItemsList extends React.Component {
             value={this.state.filterText}
             placeholder='Filter'
             onChange={e => this.setState({filterText: e.target.value})}
+            autoFocus
           />
         </ShowIf>
 
