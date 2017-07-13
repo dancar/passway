@@ -41,7 +41,9 @@ class App extends Component {
             <a href='javascript: void(0)' onClick={() => this.setState({showSettings: true})} >Settings </a>
           </DivWithDisplayCondition>
         </div>
-        { page }
+        <div className='page-container'>
+          { page }
+        </div>
       </div>
     )
   }
