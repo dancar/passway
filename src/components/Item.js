@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Button, Panel, Glyphicon } from 'react-bootstrap'
 import copy from 'copy-to-clipboard'
 
-import EditItem from '../containers/EditItem'
+import EditItem from './EditItem'
 import './Item.css'
 
 export default class Item extends Component {

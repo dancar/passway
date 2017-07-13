@@ -1,6 +1,6 @@
-import EditWindow from '../components/EditWindow.js'
-
 import React from 'react'
+
+import EditWindow from './EditWindow.js'
 
 export default class AddItem extends React.Component {
   constructor (props) {

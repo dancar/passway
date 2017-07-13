@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import { FormControl, InputGroup, Button, Glyphicon } from 'react-bootstrap'
 
 import { addItem } from '../actions'
-import Item from '../components/Item'
-import withDisplayCondition from '../components/withDisplayCondition'
-import AddItem from '../containers/AddItem' // TODO: relocate
+import Item from './Item'
+import AddItem from './AddItem'
 import './ItemsList.css'
+import withDisplayCondition from './withDisplayCondition'
 
 const InputGroupWithDisplayCondition = withDisplayCondition(InputGroup)
 
