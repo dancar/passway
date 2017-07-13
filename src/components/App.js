@@ -37,6 +37,11 @@ class App extends Component {
           <div className='passway-brand'>
             <a href='javascript: void(0)' onClick={() => this.setState({showSettings: false})}> Passway </a>
           </div>
+
+          <span className='error-message'>
+            { this.props.errorMessage }
+          </span>
+
           <DivWithDisplayCondition condition={hasPasscode} className='passway-navbar-right'>
             <a href='javascript: void(0)' onClick={() => this.setState({showSettings: true})} >Settings </a>
           </DivWithDisplayCondition>
@@ -51,6 +56,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    errorMessage: state.errorMessage,
     passcode: state.passcode,
     hasEncryptedContent: !!state.encryptedContent
   }

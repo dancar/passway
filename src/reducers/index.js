@@ -1,6 +1,15 @@
 /* globals localStorage */
 import dropbox from './dropbox.js'
 
+const errorMessage = (state = '', action) => {
+  if (action.type === 'ERROR_MESSAGE') {
+    return action.message
+  }
+  if (action.type === 'CLEAR_ERROR_MESSAGE') {
+    return ''
+  }
+  return state
+}
 const passcode = (state = null, action) => {
   if (action.type === 'SET_PASSCODE') {
     return action.newPasscode
@@ -51,6 +60,7 @@ const encryptedContent = (state, action) => {
 }
 
 export default {
+  errorMessage,
   items,
   passcode,
   dropbox,

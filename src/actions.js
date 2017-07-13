@@ -1,6 +1,22 @@
 /* globals localStorage */
 import { decrypt } from './crypto'
 
+let clearErrorMessageTimeout = null
+export const errorMessage = message => dispatch => {
+  if (clearErrorMessageTimeout) {
+    clearTimeout(clearErrorMessageTimeout)
+  }
+  clearErrorMessageTimeout = setTimeout(() => dispatch({
+    type: 'CLEAR_ERROR_MESSAGE'
+  }), 3000)
+
+  dispatch({
+    type: 'ERROR_MESSAGE',
+    message,
+    clearErrorMessageTimeout
+  })
+}
+
 export const initMiddleware = () => ({
   type: 'INIT_MIDDLEWARE'
 })
@@ -22,8 +38,11 @@ export const enterPasscode = (passcode) => (dispatch) =>
     dispatch(initItems(newItems))
     dispatch(dropboxFetch())
   })
-  // .catch(console.error)
-// TODO: error handling
+  .catch((e) => {
+    if (e.message.match(/decrypting/i)) {
+      dispatch(errorMessage('Decryption error. Bad password?'))
+    }
+  })
 
 export const initItems = (items) => ({
   items,
