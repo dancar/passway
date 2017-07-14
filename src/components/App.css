@@ -2,11 +2,10 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: black;
+  background: #112233;
 }
 
 #root {
-  background: #112233;
   max-width: 800px;
   margin: auto;
 }
