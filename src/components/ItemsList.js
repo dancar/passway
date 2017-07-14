@@ -9,6 +9,7 @@ import './ItemsList.css'
 import withDisplayCondition from './withDisplayCondition'
 
 const InputGroupWithDisplayCondition = withDisplayCondition(InputGroup)
+const FILTER_THROTTLING_TIME = 50
 
 class ItemsList extends React.Component {
   constructor (props) {
@@ -17,13 +18,13 @@ class ItemsList extends React.Component {
       expandedItemIndex: null,
       showAdd: false,
       selected: null,
+      requestedFilterText: '',
       filterText: ''
     }
-    this.filter = this.filter.bind(this)
     this.handleExpandClick = this.handleExpandClick.bind(this)
   }
 
-  filter (item) {
+  filterFn (item) {
     const filterText = this.state.filterText
     return new RegExp(filterText.split('').join('.*'), 'i').test(item.name)
   }
@@ -38,9 +39,18 @@ class ItemsList extends React.Component {
     this.setState({expandedItemIndex})
   }
 
-  render (props) {
-    const items = this.props.items.map((item, index) => {
-      if (!this.filter(item)) {
+  setFilterText (filterText) {
+    // Throttling
+    this.setState({requestedFilterText: filterText})
+    if (this.lastFilterTimeout) {
+      clearTimeout(this.lastFilterTimeout)
+    }
+    this.lastFilterTimeout = setTimeout(() => this.setState({filterText}), FILTER_THROTTLING_TIME)
+  }
+
+  renderItems () {
+    return this.props.items.map((item, index) => {
+      if (!this.filterFn(item)) {
         return false
       }
       return (
@@ -55,7 +65,9 @@ class ItemsList extends React.Component {
           />
       )
     }).filter(x => x)
+  }
 
+  render () {
     return (
       <div>
         <InputGroupWithDisplayCondition
@@ -65,13 +77,13 @@ class ItemsList extends React.Component {
           <FormControl
             type='text'
             className='filter inline'
-            value={this.state.filterText}
+            value={this.state.requestedFilterText}
             placeholder='Filter'
-            onChange={e => this.setState({filterText: e.target.value})}
+            onChange={e => this.setFilterText(e.target.value)}
             autoFocus
           />
           <InputGroup.Button>
-            <Button onClick={() => this.setState({filterText: ''})}>
+            <Button onClick={() => this.setFilterText('')}>
               Reset
             </Button>
           </InputGroup.Button>
@@ -92,7 +104,7 @@ class ItemsList extends React.Component {
           <Glyphicon glyph='plus' />
         </Button>
 
-        { items }
+        { this.renderItems() }
       </div>
     )
   }
