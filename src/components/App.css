@@ -36,7 +36,7 @@ h1 {
 }
 
 .message-info {
-  color: blue;
+  color: dodgerblue;
 }
 
 .messages {
@@ -62,7 +62,7 @@ h1 {
 .dropbox-settings-table {
   width: 100%;
   background: none;
-  margin: 10px 10px 35px 10px;
+  margin: 10px;
 }
 
 .passcode-input {

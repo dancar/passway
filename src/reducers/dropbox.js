@@ -20,7 +20,7 @@ export default (state, action) => {
   if (state === undefined) {
     const initialState = {
       settings: {
-        accesKey: null,
+        accessKey: null,
         dropboxOn: null
       },
       authUrl: null

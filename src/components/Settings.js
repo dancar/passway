@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Button, Checkbox, FormControl, ControlLabel } from 'react-bootstrap'
+import { Button, Checkbox, FormControl, FormGroup, ControlLabel } from 'react-bootstrap'
 
 import { dropboxSetSettings, clearCacheAndReset, setPasscode, infoMessage } from '../actions'
 import withDisplayCondition from './withDisplayCondition'
@@ -34,7 +34,17 @@ class Settings extends React.Component {
     this.props.setPasscode(this.state.newPasscode)
   }
 
+  oldPasscodeValidationState () {
+    return this.state.oldPasscode.length === 0
+      ? null
+      : this.state.oldPasscode === this.props.passcode
+        ? 'success'
+        : 'error'
+  }
+
   render () {
+    const oldPasscodeOk = this.state.oldPasscode === this.props.passcode
+    const newPasscodeOk = oldPasscodeOk && this.state.newPasscode.length > 0
     return (
       <div>
         <h5> Dropbox </h5>
@@ -75,16 +85,19 @@ class Settings extends React.Component {
 
         <h5> Change Passcode </h5>
         <ControlLabel>Current Passcode:</ControlLabel>
-        <FormControl
-          disabled={!this.props.passcode}
-          value={this.state.oldPasscode}
-          onChange={e => this.setState({oldPasscode: e.target.value})}
-          type='password'
-        />
+        <FormGroup controlId='currentPasscode' validationState={this.oldPasscodeValidationState()} >
+          <FormControl
+            disabled={!this.props.passcode}
+            value={this.state.oldPasscode}
+            onChange={e => this.setState({oldPasscode: e.target.value})}
+            type='password'
+            />
+          <FormControl.Feedback />
+        </FormGroup>
 
         <ControlLabel>New Passcode:</ControlLabel>
         <FormControl
-          disabled={this.state.oldPasscode !== this.props.passcode}
+          disabled={!oldPasscodeOk}
           value={this.state.newPasscode}
           onChange={(e) => {
             this.setState({newPasscode: e.target.value})
@@ -92,6 +105,7 @@ class Settings extends React.Component {
           type='password'
           />
         <Button
+          disabled={!newPasscodeOk}
           style={{marginTop: 10}}
           onClick={() => this.handlePasscodeChange()}
         >
@@ -126,6 +140,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     dropboxSetSettings: (name, value) => {
       dispatch(dropboxSetSettings(name, value))
+      dispatch(infoMessage('Dropbox Access Token saved.'))
     },
     handleReset: () => dispatch(clearCacheAndReset()),
     setPasscode: (passcode) => {
