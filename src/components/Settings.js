@@ -28,15 +28,14 @@ class Settings extends React.Component {
   render () {
     return (
       <div>
-        <h4> Settings </h4>
+        <h5> Dropbox </h5>
         <Checkbox
           checked={!!this.props.dropboxOn}
           onChange={(e) => this.props.dropboxSetSettings('dropboxOn', e.target.checked)}
           >Sync to Dropbox </Checkbox>
         <TableWithDisplayCondition
           condition={this.props.dropboxOn}
-          style={{width: '100%', margin: 'auto', background: 'none'}}
-          >
+          className='dropbox-settings-table' >
           <tbody>
             <tr>
               <td>
@@ -59,9 +58,15 @@ class Settings extends React.Component {
             </tr>
           </tbody>
         </TableWithDisplayCondition>
+        <hr />
+        <h5> Reset </h5>
 
         <Button onClick={() => window.confirm('Srsly clear cache and reset settings?') && this.props.handleReset()} >
           Clear Cache & Reset
+        </Button>
+        <hr />
+        <Button onClick={this.props.onBack} >
+          Back
         </Button>
       </div>
     )
@@ -70,6 +75,7 @@ class Settings extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    ...ownProps,
     dropboxAuthLink: state.dropbox.authUrl,
     dropboxAccessKey: state.dropbox.settings.accessKey,
     dropboxOn: state.dropbox.settings.dropboxOn

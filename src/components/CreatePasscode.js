@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
-import { Button, Form, FormControl, ControlLabel } from 'react-bootstrap'
+import { Button, Form, ControlLabel } from 'react-bootstrap'
 
+import PasscodeInput from './PasscodeInput'
 import { createPasscode } from '../actions'
 import './CreatePasscode.css'
 
@@ -14,12 +15,12 @@ class CreatePasscode extends Component {
     }
   }
 
-  handlePasscodeChange (e) {
-    this.setState({passcode: e.target.value})
+  handlePasscodeChange (passcode) {
+    this.setState({passcode})
   }
 
-  handlePasscode2Change (e) {
-    this.setState({passcode2: e.target.value})
+  handlePasscode2Change (passcode2) {
+    this.setState({passcode2})
   }
 
   passcodeOk () {
@@ -41,21 +42,20 @@ class CreatePasscode extends Component {
         Welcome to Passway. Please choose your passcode:
         <Form onSubmit={this.handleSubmit.bind(this)}>
           <ControlLabel>Enter Passcode:</ControlLabel>
-          <FormControl
-            id='passcode' type='password'
-            value={this.state.passcode}
+          <PasscodeInput
+            autoFocus
             onChange={this.handlePasscodeChange.bind(this)}
-            placeholder='Passcode' />
+            placeholder='Passcode'
+          />
 
           { this.passcodeOk() &&
 
             <div>
               <ControlLabel>Repeat Passcode:</ControlLabel>
-              <FormControl
-                id='passcode2' type='password'
-                value={this.state.passcode2}
+              <PasscodeInput
                 onChange={this.handlePasscode2Change.bind(this)}
-                placeholder='Repeat Passcode' />
+                placeholder='Repeat Passcode'
+              />
             </div>
               }
 

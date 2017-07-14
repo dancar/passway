@@ -19,7 +19,7 @@ class App extends Component {
     const hasPasscode = this.props.passcode
     const hasEncryptedContent = this.props.hasEncryptedContent
     let page = this.state.showSettings
-      ? <Settings />
+      ? <Settings onBack={() => this.setState({showSettings: false})} />
       : hasPasscode
         ? <ItemsList />
         : hasEncryptedContent
@@ -30,15 +30,15 @@ class App extends Component {
       <div>
         <div className='passway-navbar'>
           <div className='passway-brand'>
-            <a href='javascript: void(0)' onClick={() => this.setState({showSettings: false})}> Passway </a>
+            <a onClick={() => this.setState({showSettings: false})}> Passway </a>
           </div>
 
           <span className='error-message'>
             { this.props.errorMessage }
           </span>
 
-          <div className='passway-navbar-right'>
-            <a href='javascript: void(0)' onClick={() => this.setState({showSettings: true})} >Settings </a>
+          <div>
+            <a onClick={() => this.setState({showSettings: true})} >Settings </a>
           </div>
         </div>
         <div className='page-container'>

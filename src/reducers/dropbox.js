@@ -11,12 +11,6 @@ export default (state, action) => {
     return Object.assign({}, state, {settings: newSettings})
   }
 
-  if (action.type === 'SKIP_NEW_ENCRYPTED_CONTENT') {
-    return Object.assign({}, state, {
-      needsUpload: true
-    })
-  }
-
   if (action.type === 'DROPBOX_DATA_UPLOADED') {
     return Object.assign({}, state, {
       needsUpload: false
