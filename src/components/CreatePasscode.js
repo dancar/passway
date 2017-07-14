@@ -5,6 +5,7 @@ import { Button, Form, ControlLabel } from 'react-bootstrap'
 import PasscodeInput from './PasscodeInput'
 import { createPasscode } from '../actions'
 import './CreatePasscode.css'
+import { DivWithDisplayCondition } from './withDisplayCondition'
 
 class CreatePasscode extends Component {
   constructor (props) {
@@ -38,32 +39,36 @@ class CreatePasscode extends Component {
 
   render (props) {
     return (
-      <div>
-        Welcome to Passway. Please choose your passcode:
-        <Form onSubmit={this.handleSubmit.bind(this)}>
-          <ControlLabel>Enter Passcode:</ControlLabel>
-          <PasscodeInput
-            autoFocus
-            onChange={this.handlePasscodeChange.bind(this)}
-            placeholder='Passcode'
-          />
-
-          { this.passcodeOk() &&
-
-            <div>
-              <ControlLabel>Repeat Passcode:</ControlLabel>
-              <PasscodeInput
-                onChange={this.handlePasscode2Change.bind(this)}
-                placeholder='Repeat Passcode'
-              />
-            </div>
-              }
-
-          { this.passcode2Ok() &&
-          <div className='submit-container'>
-            <Button type='submit'>Submit</Button>
+      <div className='align-center'>
+        Welcome to Passway! <br />
+        Please choose a passcode to be used for data encryption.
+        <Form onSubmit={this.handleSubmit.bind(this)} >
+          <div className='create-passcode-input-container'>
+            <ControlLabel>Enter a Passcode:</ControlLabel>
+            <PasscodeInput
+              autoFocus
+              placeholder='Passcode'
+              onChange={(passcode) => { this.setState({passcode}) }}
+            />
           </div>
-                }
+
+          <DivWithDisplayCondition
+            condition={this.passcodeOk()}
+            className='create-passcode-input-container'
+          >
+            <ControlLabel>Repeat Passcode:</ControlLabel>
+            <PasscodeInput
+              onChange={passcode2 => this.setState({passcode2})}
+              placeholder='Repeat Passcode'
+            />
+          </DivWithDisplayCondition>
+
+          <DivWithDisplayCondition
+            condition={this.passcode2Ok()}
+            className='submit-container'
+          >
+            <Button type='submit'>Initialize</Button>
+          </DivWithDisplayCondition>
         </Form>
       </div>
     )

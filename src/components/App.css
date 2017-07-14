@@ -48,3 +48,7 @@ a:hover {
   background: none;
   margin: 10px 10px 35px 10px;
 }
+
+.passcode-input {
+  text-align: center;
+}
