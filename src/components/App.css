@@ -71,3 +71,7 @@ h1 {
   align: center;
   margin: auto;
 }
+
+.no-items {
+  text-align: center;
+}

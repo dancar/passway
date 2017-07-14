@@ -49,6 +49,14 @@ class ItemsList extends React.Component {
   }
 
   renderItems () {
+    if (this.props.items.length === 0) {
+      return (
+        <div className='no-items'>
+          No items found.<br />
+          Click "+" above to add some items
+        </div>
+      )
+    }
     return this.props.items.map((item, index) => {
       if (!this.filterFn(item)) {
         return false

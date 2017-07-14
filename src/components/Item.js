@@ -59,6 +59,7 @@ export default class Item extends Component {
           </div>
 
           <Button
+            title='Edit'
             onClick={this.handleEditClick}
             className='item-button'
             bsSize='small'
@@ -67,6 +68,7 @@ export default class Item extends Component {
           </Button>
 
           <Button
+            title='Copy to Clipboard'
             className='item-button'
             onClick={this.handleCopyClick}
             bsSize='small'
