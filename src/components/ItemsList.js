@@ -48,16 +48,21 @@ class ItemsList extends React.Component {
     this.lastFilterTimeout = setTimeout(() => this.setState({filterText}), FILTER_THROTTLING_TIME)
   }
 
+  renderNoItemsFound (extraText) {
+    return (
+      <div className='no-items'>
+        No items found. <br />
+        { extraText }
+      </div>
+    )
+  }
+
   renderItems () {
     if (this.props.items.length === 0) {
-      return (
-        <div className='no-items'>
-          No items found.<br />
-          Click "+" above to add some items
-        </div>
-      )
+      return this.renderNoItemsFound('Click "+" above to add some items')
     }
-    return this.props.items.map((item, index) => {
+
+    const items = this.props.items.map((item, index) => {
       if (!this.filterFn(item)) {
         return false
       }
@@ -73,6 +78,9 @@ class ItemsList extends React.Component {
           />
       )
     }).filter(x => x)
+    return items.length === 0
+      ? this.renderNoItemsFound()
+      : items
   }
 
   render () {
