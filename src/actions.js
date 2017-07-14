@@ -99,3 +99,7 @@ export const dropboxFetch = () => ({
 export const dropboxUpload = () => ({
   type: 'DROPBOX_UPLOAD'
 })
+
+export const clearCacheAndReset = () => ({
+  type: 'CLEAR_CACHE_AND_RESET'
+})

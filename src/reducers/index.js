@@ -1,4 +1,5 @@
 /* globals localStorage */
+import { combineReducers } from 'redux'
 import dropbox from './dropbox.js'
 
 const errorMessage = (state = '', action) => {
@@ -59,10 +60,21 @@ const encryptedContent = (state, action) => {
   return state
 }
 
-export default {
+const appReducer = combineReducers({
   errorMessage,
   items,
   passcode,
   dropbox,
   encryptedContent
+})
+
+const rootReducer = (state, action) => {
+  if (action.type === 'CLEAR_CACHE_AND_RESET') {
+    window.localStorage.clear()
+    window.location.reload()
+  }
+
+  return appReducer(state, action)
 }
+
+export default rootReducer
