@@ -24,10 +24,8 @@ class ItemsList extends React.Component {
   }
 
   filter (item) {
-    const filterText = this.state.filterText.trim().toLowerCase()
-    if (filterText.length === 0) { return true }
-
-    return item.name.toLowerCase().indexOf(filterText) > -1
+    const filterText = this.state.filterText
+    return new RegExp(filterText.split('').join('.*'), 'i').test(item.name)
   }
 
   handleAddItem (item) {
