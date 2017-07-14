@@ -25,16 +25,27 @@ h1 {
 }
 .passway-navbar {
   width: 100%;
-  height: 55px;
-  margin-bottom: 13px;
+  margin: 0px;
   display: flex;
   align-items: baseline;
-  padding: 6px;
+  padding: 6px 6px 0px 6px;
 }
 
-.error-message {
+.message-error {
   color: red;
-  flex: 1;
+}
+
+.message-info {
+  color: blue;
+}
+
+.messages {
+  display: block;
+  margin: 0px;
+  padding: 0px;
+  height: 20px;
+  width: 100%;
+  text-align: center;
 }
 
 .passway-brand {

@@ -1,21 +1,25 @@
 /* globals localStorage */
 import { decrypt } from './crypto'
 
-let clearErrorMessageTimeout = null
-export const errorMessage = message => dispatch => {
-  if (clearErrorMessageTimeout) {
-    clearTimeout(clearErrorMessageTimeout)
+let clearMessageTimeout = null
+const CLEAR_MESSAGE_TIMEOUT = 3000
+export const message = (text, type) => dispatch => {
+  if (clearMessageTimeout) {
+    clearTimeout(clearMessageTimeout)
   }
-  clearErrorMessageTimeout = setTimeout(() => dispatch({
-    type: 'CLEAR_ERROR_MESSAGE'
-  }), 3000)
+  clearMessageTimeout = setTimeout(() => dispatch({
+    type: 'CLEAR_MESSAGE'
+  }), CLEAR_MESSAGE_TIMEOUT)
 
   dispatch({
-    type: 'ERROR_MESSAGE',
-    message,
-    clearErrorMessageTimeout
+    type: 'MESSAGE',
+    messageType: type,
+    text
   })
 }
+
+export const infoMessage = text => message(text, 'info')
+export const errorMessage = text => message(text, 'error')
 
 export const initMiddleware = () => ({
   type: 'INIT_MIDDLEWARE'

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Button, Checkbox, FormControl, ControlLabel } from 'react-bootstrap'
 
-import { dropboxSetSettings, clearCacheAndReset, setPasscode } from '../actions'
+import { dropboxSetSettings, clearCacheAndReset, setPasscode, infoMessage } from '../actions'
 import withDisplayCondition from './withDisplayCondition'
 const TableWithDisplayCondition = withDisplayCondition('table')
 const DROPBOX_ACCESS_KEY_LENGTH = 64
@@ -128,7 +128,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(dropboxSetSettings(name, value))
     },
     handleReset: () => dispatch(clearCacheAndReset()),
-    setPasscode: (passcode) => dispatch(setPasscode(passcode))
+    setPasscode: (passcode) => {
+      dispatch(setPasscode(passcode))
+      dispatch(infoMessage('Passcode changed successfully'))
+    }
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Settings)

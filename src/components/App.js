@@ -43,13 +43,15 @@ class App extends Component {
             <a onClick={() => this.setState({showSettings: false})}> Passway </a>
           </div>
 
-          <span className='error-message'>
-            { this.props.errorMessage }
-          </span>
+          <div style={{flex: 1}} />
 
           <div>
             <a onClick={() => this.setState({showSettings: true})} >Settings </a>
           </div>
+        </div>
+        <div className={`messages message-${this.props.message.type}`}>
+          &nbsp;
+          { this.props.message.text }
         </div>
         <div className='page-container'>
           { page }
@@ -61,7 +63,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    errorMessage: state.errorMessage,
+    message: state.message,
     passcode: state.passcode,
     hasEncryptedContent: !!state.encryptedContent
   }

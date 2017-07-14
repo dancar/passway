@@ -2,13 +2,21 @@
 import { combineReducers } from 'redux'
 import dropbox from './dropbox.js'
 
-const errorMessage = (state = '', action) => {
-  if (action.type === 'ERROR_MESSAGE') {
-    return action.message
+const message = (state = {text: '', messageType: ''}, action) => {
+  if (action.type === 'MESSAGE') {
+    return {
+      text: action.text,
+      type: action.messageType
+    }
   }
-  if (action.type === 'CLEAR_ERROR_MESSAGE') {
-    return ''
+
+  if (action.type === 'CLEAR_MESSAGE') {
+    return {
+      text: '',
+      type: ''
+    }
   }
+
   return state
 }
 const passcode = (state = null, action) => {
@@ -61,7 +69,7 @@ const encryptedContent = (state, action) => {
 }
 
 const appReducer = combineReducers({
-  errorMessage,
+  message,
   items,
   passcode,
   dropbox,
