@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
-import { Button, Form } from 'react-bootstrap'
+import { Button, Form, ControlLabel } from 'react-bootstrap'
 
 import PasscodeInput from './PasscodeInput'
 import { enterPasscode } from '../actions'
@@ -21,20 +21,20 @@ class EnterPasscode extends Component {
 
   render () {
     return (
-      <div>
-        Welcome to Passway. Please enter your passcode:
-        <Form onSubmit={this.handleSubmit}>
-          <PasscodeInput
-            autoFocus
-            onChange={(passcode) => this.setState({passcode})}
-            placeholder='Passcode'
-          />
-
-          <div className='submit-container'>
-            <Button type='submit'>Submit</Button>
-          </div>
-        </Form>
-      </div>
+      <Form style={{align: 'center'}} onSubmit={this.handleSubmit}>
+        <PasscodeInput
+          autoFocus
+          onChange={(passcode) => this.setState({passcode})}
+          placeholder='Passcode'
+          >
+          <ControlLabel>
+            Please enter your passcode:
+          </ControlLabel>
+        </PasscodeInput>
+        <div className='submit-container'>
+          <Button type='submit'>Submit</Button>
+        </div>
+      </Form>
     )
   }
 }

@@ -18,6 +18,11 @@ a:hover {
   text-decoration: none;
 }
 
+h1 {
+  font-size: 18px;
+  text-align: center;
+  color: silver;
+}
 .passway-navbar {
   width: 100%;
   height: 55px;
@@ -51,4 +56,18 @@ a:hover {
 
 .passcode-input {
   text-align: center;
+}
+
+.passcode-input-container {
+  display: block;
+  text-align: center;
+  margin: 22px 0px;
+}
+
+
+.passcode-input-container > div {
+  width: 250px;
+  display: inline-block;
+  align: center;
+  margin: auto;
 }

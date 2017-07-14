@@ -40,27 +40,28 @@ class CreatePasscode extends Component {
   render (props) {
     return (
       <div className='align-center'>
-        Welcome to Passway! <br />
         Please choose a passcode to be used for data encryption.
         <Form onSubmit={this.handleSubmit.bind(this)} >
-          <div className='create-passcode-input-container'>
-            <ControlLabel>Enter a Passcode:</ControlLabel>
+          <div className='passcode-input-container'>
             <PasscodeInput
               autoFocus
               placeholder='Passcode'
               onChange={(passcode) => { this.setState({passcode}) }}
-            />
+            >
+              <ControlLabel>Enter a Passcode:</ControlLabel>
+            </PasscodeInput>
           </div>
 
           <DivWithDisplayCondition
             condition={this.passcodeOk()}
-            className='create-passcode-input-container'
+            className='passcode-input-container'
           >
-            <ControlLabel>Repeat Passcode:</ControlLabel>
             <PasscodeInput
               onChange={passcode2 => this.setState({passcode2})}
               placeholder='Repeat Passcode'
-            />
+            >
+              <ControlLabel>Repeat Passcode:</ControlLabel>
+            </PasscodeInput>
           </DivWithDisplayCondition>
 
           <DivWithDisplayCondition

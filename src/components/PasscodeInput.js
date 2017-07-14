@@ -17,19 +17,26 @@ export default class PasscodeInput extends React.Component {
 
   render () {
     return (
-      <FormControl
-        {...this.props}
-        style={{
-          fontSize: this.state.passcode.length > 0
-            ? '2em'
-            : 'inherit'
-        }}
-        type='password'
-        value={this.state.passcode}
-        onChange={this.handlePasscodeChange.bind(this)}
-        placeholder='Passcode'
-        className='passcode-input'
-      />
+      <div className='passcode-input-container'>
+        <div>
+          <div className='passcode-input-label' >
+            { this.props.children }
+          </div>
+          <FormControl
+            autoFocus={this.props.autoFocus}
+            placeholder={this.props.placeholder}
+            style={{
+              fontSize: this.state.passcode.length > 0
+                ? '2em'
+                : 'inherit'
+            }}
+            type='password'
+            value={this.state.passcode}
+            onChange={this.handlePasscodeChange.bind(this)}
+            className='passcode-input'
+            />
+        </div>
+      </div>
     )
   }
 }

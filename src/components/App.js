@@ -15,16 +15,26 @@ class App extends Component {
     }
   }
 
+  renderPasscode () {
+    const hasEncryptedContent = this.props.hasEncryptedContent
+    const component = hasEncryptedContent
+          ? <EnterPasscode />
+          : <CreatePasscode />
+    return (
+      <div>
+        <h1> Welcome to Passway </h1>
+        { component }
+      </div>
+    )
+  }
+
   render () {
     const hasPasscode = this.props.passcode
-    const hasEncryptedContent = this.props.hasEncryptedContent
     let page = this.state.showSettings
       ? <Settings onBack={() => this.setState({showSettings: false})} />
       : hasPasscode
         ? <ItemsList />
-        : hasEncryptedContent
-          ? <EnterPasscode />
-          : <CreatePasscode />
+        : this.renderPasscode()
 
     return (
       <div>
