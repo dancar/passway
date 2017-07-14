@@ -11,7 +11,6 @@ import dropboxMiddleware from './middleware/dropbox'
 import App from './components/App'
 import rootReducer from './reducers'
 import { initMiddleware } from './actions'
-import './index.css'
 
 const logger = createLogger({
   collapsed: true,

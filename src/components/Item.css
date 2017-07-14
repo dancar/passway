@@ -5,23 +5,29 @@
 
 .item-button {
   outline: none;
-  box-shadow:none;
-  border-color:transparent;
+  box-shadow: none;
+  border-color: transparent;
+  color: #4352D39;
+  overflow: hidden;
+  border-radius: 10px;
 }
 
-.item-button:hover {
-  outline: none;
-  background: darkgray;
-}
 .item-button:active {
   outline: none;
   box-shadow:none;
   border-color:transparent;
 }
+
+.item-button.item-button-expanded {
+  border-bottom: none;
+  border-radius: 10px 10px 0px 0px;
+  background: #C5979D;
+}
 .item-button:focus {
   outline: none;
   box-shadow:none;
   border-color:transparent;
+  background: #p352D39;
 }
 
 .item {
@@ -29,11 +35,22 @@
   margin-top: 6px;
 }
 
-.item .panel {
-  margin-bottom: 8px;
+.item-main {
+  /* border: 1px solid #c5979D; */
+  border: 1px solid gray;
+  border-radius: 7px;
+  padding: 5px;
+  text-align: center;
+  background: #112233;
 }
 
-.item .panel-body {
+.item .panel {
+  border-radius: 0px 0px 10px 10px;
+  background: #484D6D;
+}
+
+.item .panel .panel-body {
   display: flex;
   align-items: center;
+  border: none;
 }

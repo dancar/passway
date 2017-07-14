@@ -89,7 +89,6 @@ export default class EditWindow extends Component {
 
           <Button
             type='submit'
-            bsStyle='primary'
             onClick={this.handleSubmit}>Save</Button>
         </Modal.Footer>
       </Modal>

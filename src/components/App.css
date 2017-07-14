@@ -1,4 +1,12 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: black;
+}
+
 #root {
+  background: #112233;
   max-width: 800px;
   margin: auto;
 }
@@ -9,19 +17,45 @@
 
 input, button, select, textarea , a, h4{
   font-family: monospace;
+  box-shadow: none;
+}
+
+.btn-default {
+  background: #484D6D;
+  border: none;
+  box-shadow: none;
+  border-radius: 8px;
+}
+
+.btn-default:hover {
+  border: none;
+  outline: none;
+  background: #C5979D;
+}
+
+.btn-default:active {
+  background: none;
 }
 
 a {
+  color: #9AC4F8;
   cursor: pointer;
 }
 a:hover {
   text-decoration: none;
 }
 
-h1 {
-  font-size: 18px;
+h5 {
+  margin-top: 30px;
+  font-size: 1.3em;
   text-align: center;
-  color: silver;
+  border-top: 1px solid darkgray;
+  padding-top: 9px;
+}
+h1 {
+  font-size: 1.3em;
+  text-align: center;
+  color: #F0F1F5;
 }
 .passway-navbar {
   width: 100%;
@@ -59,14 +93,10 @@ h1 {
   color: white;
 }
 
-.dropbox-settings-table {
-  width: 100%;
-  background: none;
-  margin: 10px;
-}
-
 .passcode-input {
+  color: #C5979D;
   text-align: center;
+  font-size: 2em;
 }
 
 .passcode-input-container {
@@ -85,4 +115,16 @@ h1 {
 
 .no-items {
   text-align: center;
+}
+
+.panel-default {
+  background: #6A8D92;
+  border: none;
+}
+
+.modal-content {
+  background: #112233;
+}
+.dropdown-menu {
+  background: #493548;
 }
