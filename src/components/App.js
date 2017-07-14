@@ -6,7 +6,6 @@ import ItemsList from './ItemsList.js'
 import CreatePasscode from './CreatePasscode.js'
 import EnterPasscode from './EnterPasscode.js'
 import Settings from './Settings.js'
-import { DivWithDisplayCondition } from './withDisplayCondition'
 
 class App extends Component {
   constructor (props) {
@@ -19,17 +18,13 @@ class App extends Component {
   render () {
     const hasPasscode = this.props.passcode
     const hasEncryptedContent = this.props.hasEncryptedContent
-    let page
-
-    if (hasPasscode) {
-      page = this.state.showSettings
-        ? <Settings />
-        : <ItemsList />
-    } else {
-      page = hasEncryptedContent
-        ? <EnterPasscode />
-        : <CreatePasscode />
-    }
+    let page = this.state.showSettings
+      ? <Settings />
+      : hasPasscode
+        ? <ItemsList />
+        : hasEncryptedContent
+          ? <EnterPasscode />
+          : <CreatePasscode />
 
     return (
       <div>
@@ -42,9 +37,9 @@ class App extends Component {
             { this.props.errorMessage }
           </span>
 
-          <DivWithDisplayCondition condition={hasPasscode} className='passway-navbar-right'>
+          <div className='passway-navbar-right'>
             <a href='javascript: void(0)' onClick={() => this.setState({showSettings: true})} >Settings </a>
-          </DivWithDisplayCondition>
+          </div>
         </div>
         <div className='page-container'>
           { page }
