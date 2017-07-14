@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Button, Checkbox, FormControl } from 'react-bootstrap'
+import { Button, Checkbox, FormControl, ControlLabel } from 'react-bootstrap'
 
-import { dropboxSetSettings, clearCacheAndReset } from '../actions'
+import { dropboxSetSettings, clearCacheAndReset, setPasscode } from '../actions'
 import withDisplayCondition from './withDisplayCondition'
 const TableWithDisplayCondition = withDisplayCondition('table')
 const DROPBOX_ACCESS_KEY_LENGTH = 64
@@ -10,7 +10,8 @@ class Settings extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      dropboxOn: this.props.dropboxOn,
+      oldPasscode: '',
+      newPasscode: '',
       dropboxAccessKey: this.props.dropboxAccessKey || '',
       dropboxAllowSaveAccessKey: false
     }
@@ -25,14 +26,26 @@ class Settings extends React.Component {
     })
   }
 
+  handlePasscodeChange () {
+    this.setState({
+      oldPasscode: '',
+      newPasscode: ''
+    })
+    this.props.setPasscode(this.state.newPasscode)
+  }
+
   render () {
     return (
       <div>
         <h5> Dropbox </h5>
         <Checkbox
+          disabled={!this.props.passcode}
           checked={!!this.props.dropboxOn}
           onChange={(e) => this.props.dropboxSetSettings('dropboxOn', e.target.checked)}
-          >Sync to Dropbox </Checkbox>
+          >
+          Sync to Dropbox
+        </Checkbox>
+
         <TableWithDisplayCondition
           condition={this.props.dropboxOn}
           className='dropbox-settings-table' >
@@ -59,6 +72,33 @@ class Settings extends React.Component {
           </tbody>
         </TableWithDisplayCondition>
         <hr />
+
+        <h5> Change Passcode </h5>
+        <ControlLabel>Current Passcode:</ControlLabel>
+        <FormControl
+          disabled={!this.props.passcode}
+          value={this.state.oldPasscode}
+          onChange={e => this.setState({oldPasscode: e.target.value})}
+          type='password'
+        />
+
+        <ControlLabel>New Passcode:</ControlLabel>
+        <FormControl
+          disabled={this.state.oldPasscode !== this.props.passcode}
+          value={this.state.newPasscode}
+          onChange={(e) => {
+            this.setState({newPasscode: e.target.value})
+          }}
+          type='password'
+          />
+        <Button
+          style={{marginTop: 10}}
+          onClick={() => this.handlePasscodeChange()}
+        >
+          Save
+        </Button>
+        <hr />
+
         <h5> Reset </h5>
 
         <Button onClick={() => window.confirm('Srsly clear cache and reset settings?') && this.props.handleReset()} >
@@ -76,6 +116,7 @@ class Settings extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     ...ownProps,
+    passcode: state.passcode,
     dropboxAuthLink: state.dropbox.authUrl,
     dropboxAccessKey: state.dropbox.settings.accessKey,
     dropboxOn: state.dropbox.settings.dropboxOn
@@ -86,7 +127,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     dropboxSetSettings: (name, value) => {
       dispatch(dropboxSetSettings(name, value))
     },
-    handleReset: () => dispatch(clearCacheAndReset())
+    handleReset: () => dispatch(clearCacheAndReset()),
+    setPasscode: (passcode) => dispatch(setPasscode(passcode))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Settings)

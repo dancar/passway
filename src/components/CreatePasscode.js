@@ -48,7 +48,7 @@ class CreatePasscode extends Component {
               placeholder='Passcode'
               onChange={(passcode) => { this.setState({passcode}) }}
             >
-              <ControlLabel>Enter a Passcode:</ControlLabel>
+              <ControlLabel>Enter a new Passcode:</ControlLabel>
             </PasscodeInput>
           </div>
 
