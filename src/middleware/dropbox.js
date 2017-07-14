@@ -5,7 +5,7 @@ import Dropbox from 'dropbox'
 import * as crypto from '../crypto.js'
 
 export const COPY_TOKEN_PAGE = 'https://www.dropbox.com/1/oauth2/display_token'
-const FILE_PATH = '/passway.txt.gpg'
+const FILE_PATH = '/passway.json.gpg'
 const CLIENT_ID = 'oir8xvi101xx01y'
 
 export default store => {
