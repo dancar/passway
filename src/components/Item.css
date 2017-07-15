@@ -36,8 +36,7 @@
 }
 
 .item-main {
-  /* border: 1px solid #c5979D; */
-  border: 1px solid gray;
+  color: silver;
   border-radius: 7px;
   padding: 5px;
   text-align: center;

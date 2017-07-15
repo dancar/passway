@@ -47,7 +47,7 @@ a:hover {
 h5 {
   margin-top: 30px;
   font-size: 1.3em;
-  text-align: center;
+  text-align: left;
   border-top: 1px solid darkgray;
   padding-top: 9px;
 }
@@ -126,4 +126,8 @@ h1 {
 }
 .dropdown-menu {
   background: #493548;
+}
+
+.items-list-filter {
+  height: 40px;
 }

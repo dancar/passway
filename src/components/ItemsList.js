@@ -92,7 +92,7 @@ class ItemsList extends React.Component {
         >
           <FormControl
             type='text'
-            className='filter inline'
+            className='items-list-filter inline'
             value={this.state.requestedFilterText}
             placeholder='Filter'
             onChange={e => this.setFilterText(e.target.value)}
