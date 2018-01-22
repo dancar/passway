@@ -4,7 +4,7 @@ import { Button, Form, ControlLabel } from 'react-bootstrap'
 
 import PasscodeInput from './PasscodeInput'
 import { createPasscode } from '../actions'
-import './CreatePasscode.css'
+import './css/CreatePasscode.css'
 import { DivWithDisplayCondition } from './withDisplayCondition'
 
 class CreatePasscode extends Component {

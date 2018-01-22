@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import './App.css'
-import ItemsList from './ItemsList.js'
-import CreatePasscode from './CreatePasscode.js'
-import EnterPasscode from './EnterPasscode.js'
-import Settings from './Settings.js'
+import './css/App.css'
+import ItemsList from './ItemsList'
+import CreatePasscode from './CreatePasscode'
+import EnterPasscode from './EnterPasscode'
+import Settings from './Settings'
 
 class App extends Component {
   constructor (props) {
@@ -15,7 +15,7 @@ class App extends Component {
     }
   }
 
-  renderPasscode () {
+  renderWelcome () {
     const hasEncryptedContent = this.props.hasEncryptedContent
     const component = hasEncryptedContent
           ? <EnterPasscode />
@@ -34,7 +34,7 @@ class App extends Component {
       ? <Settings onBack={() => this.setState({showSettings: false})} />
       : hasPasscode
         ? <ItemsList />
-        : this.renderPasscode()
+        : this.renderWelcome()
 
     return (
       <div>

@@ -1,6 +1,7 @@
 const fs = require('fs')
 const execFileSync = require('child_process').execFileSync
 
+const GPG_COMMAND = 'gpg'
 exports.decrypt = (contentAsArmor, passphrase) => {
   const TEMP_FILE = '/tmp/cryptotmpfile'
   fs.writeFileSync(TEMP_FILE, contentAsArmor, {encoding: null})
@@ -18,7 +19,7 @@ exports.decrypt = (contentAsArmor, passphrase) => {
     encoding: 'utf-8'
   }
 
-  return execFileSync('gpg', args, options)
+  return execFileSync(GPG_COMMAND, args, options)
 }
 
 exports.encrypt = (content, passphrase) => {
@@ -35,5 +36,5 @@ exports.encrypt = (content, passphrase) => {
     encoding: 'utf-8'
   }
 
-  return execFileSync('gpg', args, options)
+  return execFileSync(GPG_COMMAND, args, options)
 }

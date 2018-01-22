@@ -5,7 +5,7 @@ import { FormControl, InputGroup, Button, Glyphicon } from 'react-bootstrap'
 import { addItem } from '../actions'
 import Item from './Item'
 import AddItem from './AddItem'
-import './ItemsList.css'
+import './css/ItemsList.css'
 import withDisplayCondition from './withDisplayCondition'
 
 const InputGroupWithDisplayCondition = withDisplayCondition(InputGroup)

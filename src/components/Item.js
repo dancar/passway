@@ -3,7 +3,7 @@ import { Button, Panel, Glyphicon } from 'react-bootstrap'
 import copy from 'copy-to-clipboard'
 
 import EditItem from './EditItem'
-import './Item.css'
+import './css/Item.css'
 
 export default class Item extends Component {
   constructor (props) {
